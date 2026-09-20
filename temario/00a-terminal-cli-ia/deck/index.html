@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tema 00a — Terminal, CLI y tu primer asistente de IA</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="tpl-tema-00a">
+<div class="deck">
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="slide is-active">
+    <div class="hc-grid"></div>
+    <div class="hc-vignette"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>~/curso-ai-powered · zsh · tema-00a</div></div>
+    <div style="margin:auto 0">
+      <p class="hc-prompt">whoami --primer-asistente</p>
+      <h1 class="hc-h1 anim-fade-up" data-anim="fade-up">TERMINAL, CLI<br>Y TU PRIMER<br>ASISTENTE DE IA<span class="hc-cursor"></span></h1>
+      <p class="hc-lede">Dejamos tu máquina lista para trabajar con IA desde la terminal — entendiendo cada pieza que instalás, no "porque sí".</p>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">terminal</span>
+      <span class="hc-tag">cli</span>
+      <span class="hc-tag">token</span>
+      <span class="hc-tag">ventana-de-contexto</span>
+      <span class="hc-tag">créditos</span>
+      <span class="hc-tag amber">claude.md</span>
+      <span class="hc-tag amber">readme.md</span>
+    </div>
+    <div class="hc-footer"><span>tema-00a · AI-Powered QA</span><span>01 / 15</span></div>
+    <aside class="notes">
+      <p>Hoy dejamos tu máquina lista para trabajar con IA desde la terminal. Vamos a instalar lo mínimo indispensable y, en el camino, vas a entender qué es cada pieza que estás instalando — no instalamos "porque sí".</p>
+    </aside>
+  </section>
+
+  <!-- ============ 2. ¿QUÉ ES UNA TERMINAL? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · terminal</div></div>
+    <p class="hc-prompt">man terminal</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es una <span style="color:var(--hc-green)">TERMINAL</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Programa donde escribís <strong>comandos de texto</strong> en vez de clickear botones.</li>
+      <li>Mismo resultado que con el mouse, pero <strong>repetible y más rápido</strong> — no hace falta re-clickear cada vez.</li>
+      <li>Es el lugar donde vas a vivir el resto del curso: para hablar con tu asistente de IA y, más adelante, para git.</li>
+    </ul>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// con mouse (gui)</div><div class="desc">Explorador de archivos → doble clic en la carpeta → clic derecho → "Abrir con…" → esperar que cargue el programa.</div></div>
+      <div class="hc-card"><div class="lbl">// con terminal</div><div class="desc"><span style="color:var(--hc-green);font-family:'JetBrains Mono',monospace">cd proyecto &amp;&amp; code .</span><br><br>Un comando, mismo resultado — y repetible sin volver a clickear.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">texto, no clicks</span>
+      <span class="hc-tag">repetible y más rápido</span>
+      <span class="hc-tag amber">después: también git</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>02 / 15</span></div>
+    <aside class="notes">
+      <p>Una terminal es un programa donde escribís comandos de texto en vez de clickear botones. Es el lugar donde vas a vivir el resto del curso — tanto para hablar con tu asistente de IA como, más adelante, para git.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 3. ACCIÓN: INSTALAR WARP ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>install · warp</div></div>
+    <p class="hc-prompt">install warp-terminal</p>
+    <h2 class="hc-h2" style="margin-top:12px">Instalá <span style="color:var(--hc-green)">WARP</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># guia-instalacion.md → sección "Terminal"</span>
+
+<span class="cm"># Linux</span>
+<span class="kw">$</span> sudo apt install ./warp-terminal*.deb
+
+<span class="cm"># Windows — elegí 1 de 3 opciones</span>
+<span class="fn">1)</span> PowerShell / Windows Terminal <span class="cm">(nativo)</span>
+<span class="fn">2)</span> Warp sin WSL2
+<span class="fn">3)</span> Warp + WSL2</pre>
+    <div class="kw-row">
+      <span class="hc-tag">linux: .deb</span>
+      <span class="hc-tag">windows: 3 opciones</span>
+      <span class="hc-tag amber">3-5 min</span>
+    </div>
+    <div class="hc-footer"><span>acción · setup</span><span>03 / 15</span></div>
+    <aside class="notes">
+      <p>Vamos a instalar Warp, la terminal que usamos en el curso. Abran guia-instalacion.md, sección "Terminal", y sigan los pasos de su sistema operativo. Les doy 3-5 minutos — avisen si algo no corre igual que en la guía.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 4. ¿QUÉ ES UN CLI? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · cli</div></div>
+    <p class="hc-prompt">man cli</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es un <span style="color:var(--hc-green)">CLI</span>?</h2>
+    <ul class="hc-bullets">
+      <li><strong>CLI = Command Line Interface</strong> — programa que se maneja solo con comandos de texto, sin ventanas.</li>
+      <li>Corre <strong>DENTRO</strong> de la terminal que acabás de instalar.</li>
+      <li>El asistente de IA que vas a usar hoy es, justamente, un CLI.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:14px"><span class="cm"># así arranca el CLI que vas a instalar hoy</span>
+<span class="kw">$</span> claude
+<span class="fn">Claude Code v2.x</span>  <span class="cm">— escribí tu mensaje y Enter</span>
+&gt; <span class="hc-cursor"></span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">sin ventanas ni botones</span>
+      <span class="hc-tag">corre dentro de la terminal</span>
+      <span class="hc-tag amber">tu asistente de ia es un cli</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>04 / 15</span></div>
+    <aside class="notes">
+      <p>CLI es "Command Line Interface" — un programa que se maneja solo con comandos de texto, sin ventanas. Corre DENTRO de la terminal que acaban de instalar. El asistente de IA que vamos a usar hoy es, justamente, un CLI.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 5. ACCIÓN: INSTALAR NODE.JS ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>install · node</div></div>
+    <p class="hc-prompt">install node --lts</p>
+    <h2 class="hc-h2" style="margin-top:12px">Instalá <span style="color:var(--hc-green)">Node.js</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># guia-instalacion.md → "Git, Node.js y VS Code" (solo Node.js LTS)</span>
+
+<span class="kw">$</span> node --version
+<span class="kw">$</span> npm --version</pre>
+    <div class="kw-row">
+      <span class="hc-tag">runtime necesario</span>
+      <span class="hc-tag">versión lts</span>
+      <span class="hc-tag">verificá con --version</span>
+    </div>
+    <div class="hc-footer"><span>acción · setup</span><span>05 / 15</span></div>
+    <aside class="notes">
+      <p>El CLI del asistente necesita Node.js para correr. Instálenlo siguiendo la guía (sección "Git, Node.js y VS Code" — solo la parte de Node.js) y verifiquen con node --version y npm --version.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 6. ACCIÓN: ELEGÍ TU RUNNER DE IA ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>choose · runner</div></div>
+    <p class="hc-prompt">which ai-cli</p>
+    <h2 class="hc-h2" style="margin-top:12px">Elegí tu <span style="color:var(--hc-green)">runner de IA</span></h2>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">opción A</div><div class="val">Claude Code CLI</div><div class="desc">Cuenta Claude Pro. Login por navegador.</div></div>
+      <div class="hc-card"><div class="lbl">opción B</div><div class="val">Codex CLI</div><div class="desc">Cuenta ChatGPT Plus/Codex. Login por navegador.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag red">uno solo, no los dos</span>
+      <span class="hc-tag">son intercambiables</span>
+      <span class="hc-tag">login con tu cuenta</span>
+    </div>
+    <div class="hc-footer"><span>acción · setup</span><span>06 / 15</span></div>
+    <aside class="notes">
+      <p>Ahora sí, el CLI del asistente. Elijan UNO: Claude Code CLI o Codex CLI — para este curso son equivalentes, no hace falta instalar los dos. Sigan la sub-sección "Runner de IA — elegí uno" de la guía.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 7. VERIFICACIÓN: ¿RESPONDE? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>verify · smoke</div></div>
+    <p class="hc-prompt">hola</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Te <span style="color:var(--hc-green)">responde</span>?</h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># dentro del CLI que instalaste</span>
+&gt; hola
+<span class="st">✓ el asistente responde</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">escribí "hola"</span>
+      <span class="hc-tag">confirmá respuesta</span>
+      <span class="hc-tag amber">base de todo lo que viene</span>
+    </div>
+    <div class="hc-footer"><span>verificación</span><span>07 / 15</span></div>
+    <aside class="notes">
+      <p>Dentro del CLI que instalaron, escriban "hola" y confirmen que el asistente responde. Si no arranca, revisamos juntos antes de seguir — esto es la base de todo lo que viene.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 8. ¿QUÉ ES UN TOKEN? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · token</div></div>
+    <p class="hc-prompt">man token</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es un <span style="color:var(--hc-green)">token</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Unidad mínima de texto que procesa el modelo — <strong>no es lo mismo</strong> que una palabra.</li>
+      <li>Puede ser una palabra completa, un pedazo de palabra, o un signo de puntuación.</li>
+      <li class="gotcha">El consumo (créditos, límites) se mide en tokens — no en mensajes ni en palabras.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm">"Necesito refinar esta historia de usuario"</span>
+<span class="fn">→</span> Necesito<span class="hl">|</span> refin<span class="hl">|</span>ar<span class="hl">|</span> esta<span class="hl">|</span> historia<span class="hl">|</span> de<span class="hl">|</span> usuario
+<span class="fn">→</span> <span class="st">7 tokens</span> para 6 palabras <span class="cm">(aprox.)</span></pre>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// regla rápida</div><div class="desc">~4 caracteres ≈ 1 token en inglés. En español varía más por acentos y conjugaciones.</div></div>
+      <div class="hc-card"><div class="lbl">// por qué importa</div><div class="desc">El consumo (créditos, límites) se mide en tokens — no en mensajes ni en palabras.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">unidad mínima de texto</span>
+      <span class="hc-tag">no es = 1 palabra</span>
+      <span class="hc-tag amber">así se factura el consumo</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>08 / 15</span></div>
+    <aside class="notes">
+      <p>Un token es la unidad mínima de texto que procesa el modelo — no es exactamente una palabra, puede ser un pedazo de palabra o un signo de puntuación. Todo lo que le mandan y todo lo que les responde se mide en tokens.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 9. ¿QUÉ ES LA VENTANA DE CONTEXTO? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · context-window</div></div>
+    <p class="hc-prompt">man context-window</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es la <span style="color:var(--hc-green)">ventana de contexto</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Cantidad máxima de tokens que el asistente puede tener "en la cabeza" a la vez.</li>
+      <li>Ahí entran: tus mensajes + los archivos que leyó + sus propias respuestas — todo junto.</li>
+      <li class="gotcha">Si se llena, el asistente empieza a perder detalle de lo dicho al principio de la charla.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># tu conversación hasta ahora</span>
+[<span class="st">███████████████</span><span class="cm">░░░░░░░░░</span>] <span class="fn">62%</span> de 200.000 tokens usados
+
+<span class="cm"># en criollo: ≈150.000 palabras ≈ un libro de 400 páginas</span></pre>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// qué entra ahí</div><div class="desc">Tus mensajes + archivos que leyó + sus respuestas — todo junto, en la misma ventana.</div></div>
+      <div class="hc-card"><div class="lbl">// si se llena</div><div class="desc">El asistente empieza a perder detalle de lo dicho al principio de la charla.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">memoria activa</span>
+      <span class="hc-tag">máximo de tokens simultáneos</span>
+      <span class="hc-tag red">se puede llenar</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>09 / 15</span></div>
+    <aside class="notes">
+      <p>Es la cantidad máxima de tokens que el asistente puede tener "en la cabeza" al mismo tiempo. Si la conversación es muy larga, puede llenarse — y el asistente empieza a perder detalle de lo que se dijo al principio.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 10. CRÉDITOS: 5HRS VS. SEMANALES ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>billing · credits</div></div>
+    <p class="hc-prompt">credits --status</p>
+    <h2 class="hc-h2" style="margin-top:12px">Créditos: <span style="color:var(--hc-green)">5hrs</span> vs. <span style="color:var(--hc-amber)">semanales</span></h2>
+    <ul class="hc-bullets">
+      <li>Dos modelos de consumo: reset cada <strong>5 horas</strong> de uso activo, o reset <strong>semanal</strong>.</li>
+      <li>Conviene revisar cuál tiene tu plan (Claude Pro, ChatGPT Plus/Codex) antes de una jornada larga.</li>
+      <li class="gotcha">Quedarte sin crédito a mitad de una tarea real es evitable si sabés qué modelo tenés.</li>
+    </ul>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// modelo A</div><div class="val" style="font-size:18px">reset cada 5hrs</div><div class="desc">Se renuevan por bloque de 5 horas desde tu primer mensaje de la sesión.</div></div>
+      <div class="hc-card"><div class="lbl">// modelo B</div><div class="val" style="font-size:18px;color:var(--hc-amber)">reset semanal</div><div class="desc">Se renuevan una vez por semana, sin importar cuándo los usás.</div></div>
+    </div>
+    <pre class="hc-codebox" style="margin-top:16px"><span class="cm"># escenario: jornada de 8hs seguidas</span>
+<span class="fn">modelo A</span> → te quedás sin crédito a mitad de la tarde
+<span class="fn">modelo B</span> → seguís, pero el lunes arrancás desde cero</pre>
+    <div class="kw-row">
+      <span class="hc-tag">2 modelos de consumo</span>
+      <span class="hc-tag amber">revisá cuál tiene tu plan</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>10 / 15</span></div>
+    <aside class="notes">
+      <p>Según el plan que tengan, los créditos se resetean cada bloque de 5 horas de uso activo, o una vez por semana. Conviene que revisen cuál es el modelo de su plan para no quedarse sin crédito en medio de una tarea real.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 11. ¿QUÉ ES CLAUDE.MD / AGENTS.MD? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · claude.md</div></div>
+    <p class="hc-prompt">cat CLAUDE.md</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es <span style="color:var(--hc-green)">CLAUDE.md</span> / AGENTS.md?</h2>
+    <ul class="hc-bullets">
+      <li>Archivo que el CLI lee <strong>automáticamente</strong> al arrancar en una carpeta.</li>
+      <li>Ahí van instrucciones fijas: idioma, convenciones, contexto del proyecto — lo que repetirías en cada mensaje.</li>
+      <li class="gotcha">Solo aplica a ESA carpeta — no a otros proyectos que abras con el mismo CLI.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px">abrís el CLI en esta carpeta
+        <span class="fn">↓</span>
+busca <span class="st">CLAUDE.md</span> / <span class="st">AGENTS.md</span> en la raíz
+        <span class="fn">↓</span>
+¿existe? → <span class="st">sí</span> → lo carga como instrucciones fijas
+         → <span class="cm">no</span>  → usa comportamiento por defecto</pre>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// qué poner ahí</div><div class="desc">Idioma, convenciones, contexto del proyecto — lo que repetirías en cada mensaje.</div></div>
+      <div class="hc-card"><div class="lbl">// alcance</div><div class="desc">Solo aplica a ESTA carpeta, no a otros proyectos que abras con el mismo CLI.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">memoria de proyecto</span>
+      <span class="hc-tag">se lee al arrancar</span>
+      <span class="hc-tag amber">no repetir instrucciones cada vez</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>11 / 15</span></div>
+    <aside class="notes">
+      <p>Es un archivo de texto que el CLI lee automáticamente al arrancar en una carpeta — instrucciones persistentes para que el asistente sepa cómo trabajar en ESE proyecto, sin que se las tengan que repetir en cada mensaje.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 12. ACCIÓN: CREÁ TU CLAUDE.MD ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>edit · claude.md</div></div>
+    <p class="hc-prompt">touch CLAUDE.md</p>
+    <h2 class="hc-h2" style="margin-top:12px">Creá tu <span style="color:var(--hc-green)">CLAUDE.md</span> / AGENTS.md</h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># en la carpeta de trabajo del curso</span>
+<span class="fn">## Idioma</span>
+<span class="var">Respondeme siempre en español.</span>
+
+<span class="fn">## Carpeta</span>
+<span class="var">Esta es mi carpeta de trabajo del curso AI-Powered QA.</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">2-3 líneas simples</span>
+      <span class="hc-tag">ej: idioma de respuesta</span>
+      <span class="hc-tag amber">reiniciá y probá</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>12 / 15</span></div>
+    <aside class="notes">
+      <p>Creen el archivo (el nombre depende del runner que eligieron) en la carpeta de trabajo del curso, con 2-3 líneas simples — por ejemplo, en qué idioma quieren que les responda. Reinicien el CLI y pregúntenle algo que dependa de eso para confirmar que lo está leyendo.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 13. ¿QUÉ ES README.MD? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · readme</div></div>
+    <p class="hc-prompt">cat README.md</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es <span style="color:var(--hc-green)">README.md</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Los dos son <code>.md</code> en la raíz de la carpeta, pero cumplen roles distintos.</li>
+      <li><strong>README.md</strong> lo lee una PERSONA — explica de qué se trata el repo, lo primero que se lee al entrar.</li>
+      <li><strong>CLAUDE.md</strong> lo lee el ASISTENTE — le dice cómo comportarse en este proyecto.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">para humanos, no para la ia</span>
+      <span class="hc-tag">lo primero que se lee</span>
+      <span class="hc-tag amber">esta carpeta será un repo</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>13 / 15</span></div>
+    <aside class="notes">
+      <p>Es el archivo que explica de qué se trata un repositorio — lo primero que lee cualquiera al entrar a la carpeta. Esta carpeta se va a convertir en un repositorio git más adelante en el curso, así que arrancamos el hábito desde ya.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 14. ACCIÓN: CREÁ TU README.MD ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>edit · readme</div></div>
+    <p class="hc-prompt">touch README.md</p>
+    <h2 class="hc-h2" style="margin-top:12px">Creá tu <span style="color:var(--hc-green)">README.md</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn"># Mi carpeta de trabajo — AI-Powered QA</span>
+
+<span class="var">Acá guardo lo que voy practicando en el curso AI-Powered QA.</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">título</span>
+      <span class="hc-tag">1-2 líneas</span>
+      <span class="hc-tag amber">para qué es la carpeta</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>14 / 15</span></div>
+    <aside class="notes">
+      <p>Creen un README.md con un título y 1-2 líneas contando para qué es esta carpeta.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 15. CIERRE Y CHECKLIST ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>EOF</div></div>
+    <p class="hc-prompt">setup --status</p>
+    <h2 class="hc-h2" style="margin-top:12px">Checklist del <span style="color:var(--hc-green)">día</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px">[<span class="st">OK</span>] Warp instalado
+[<span class="st">OK</span>] Node.js instalado
+[<span class="st">OK</span>] Runner de IA instalado y logueado
+[<span class="st">OK</span>] CLAUDE.md / AGENTS.md propio
+[<span class="st">OK</span>] README.md propio
+
+<span class="cm"># próxima clase: tema 00b</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">punto de partida listo</span>
+      <span class="hc-tag amber">próxima clase: 00b</span>
+    </div>
+    <div class="hc-footer"><span>tema-00a · AI-Powered QA</span><span>15 / 15</span></div>
+    <aside class="notes">
+      <p>Repasemos: Warp instalado, Node.js instalado, su runner de IA instalado y logueado, CLAUDE.md/AGENTS.md propio, README.md propio. Con esto ya tienen el punto de partida para la próxima clase.</p>
+    </aside>
+  </section>
+
+</div>
+
+<div style="position:fixed;bottom:12px;left:12px;font-size:11px;color:#484f5866;z-index:100;pointer-events:none">
+  S modo orador · ← → navegar · F pantalla completa · O resumen
+</div>
+
+<script src="assets/runtime.js"></script>
+</body>
+</html>
