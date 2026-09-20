@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tema 00b — Git, GitHub y tu primera skill</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="tpl-tema-00b">
+<div class="deck">
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="slide is-active">
+    <div class="hc-grid"></div>
+    <div class="hc-vignette"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>~/curso-ai-powered · zsh · tema-00b</div></div>
+    <div style="margin:auto 0">
+      <p class="hc-prompt">whoami --version-control</p>
+      <h1 class="hc-h1 anim-fade-up" data-anim="fade-up">GIT, GITHUB<br>Y TU PRIMERA<br>SKILL<span class="hc-cursor"></span></h1>
+      <p class="hc-lede">Hoy tu carpeta de trabajo se convierte en un repositorio real de GitHub — y miramos cómo está armado el primer bloque que le enseña tareas a tu asistente de IA.</p>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">terminal</span>
+      <span class="hc-tag">git</span>
+      <span class="hc-tag">github</span>
+      <span class="hc-tag">repositorio</span>
+      <span class="hc-tag amber">ingeniería-de-prompt</span>
+      <span class="hc-tag amber">skill</span>
+    </div>
+    <div class="hc-footer"><span>tema-00b · AI-Powered QA</span><span>01 / 20</span></div>
+    <aside class="notes">
+      <p>Hoy sumamos dos piezas clave: cómo versionar y compartir tu trabajo con Git y GitHub, y cómo está armada una skill — el bloque que le enseña tareas concretas a tu asistente de IA. Al final de la clase, tu carpeta de trabajo va a ser un repositorio real de GitHub.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 2. TERMINAL: BÁSICOS BÁSICOS ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · terminal-basics</div></div>
+    <p class="hc-prompt">man cd ls</p>
+    <h2 class="hc-h2" style="margin-top:12px">Terminal: básicos <span style="color:var(--hc-green)">básicos</span></h2>
+    <ul class="hc-bullets">
+      <li><code>cd &lt;carpeta&gt;</code> — entrar a una carpeta.</li>
+      <li><code>ls</code> — listar el contenido de la carpeta actual.</li>
+      <li><code>cd ..</code> — subir un nivel (volver a la carpeta contenedora).</li>
+      <li class="gotcha">El resto de comandos de terminal queda de tarea — investigalos por tu cuenta.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">cd</span> &lt;carpeta&gt;   <span class="cm"># entrar a una carpeta</span>
+<span class="kw">ls</span>             <span class="cm"># listar el contenido de la carpeta actual</span>
+<span class="kw">cd</span> ..           <span class="cm"># subir un nivel</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">cd</span>
+      <span class="hc-tag">ls</span>
+      <span class="hc-tag">cd ..</span>
+      <span class="hc-tag amber">el resto: tarea tuya</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>02 / 20</span></div>
+    <aside class="notes">
+      <p>Antes de git necesitamos moverte por carpetas desde la terminal. Solo tres comandos: cd para entrar a una carpeta, ls para ver qué hay adentro, cd .. para volver un nivel atrás. El resto de comandos de terminal quedan de tarea para investigar por su cuenta.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 3. ACCIÓN: NAVEGÁ CON CD, LS Y CD .. ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>practice · navigate</div></div>
+    <p class="hc-prompt">cd curso-ai-powered</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: navegá con <span style="color:var(--hc-green)">cd, ls, cd ..</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">$</span> cd curso-ai-powered
+<span class="kw">$</span> ls
+<span class="fn">README.md  CLAUDE.md</span>
+<span class="kw">$</span> cd ..
+<span class="kw">$</span> ls
+<span class="fn">curso-ai-powered/</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">practicá los 3</span>
+      <span class="hc-tag">ls confirma dónde estás</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>03 / 20</span></div>
+    <aside class="notes">
+      <p>Practiquen: entren a la carpeta de trabajo del curso con cd, listen su contenido con ls, salgan con cd .. y vuelvan a entrar. Avisen si ls no muestra lo que esperan.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 4. ¿QUÉ ES GIT? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · git</div></div>
+    <p class="hc-prompt">man git</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es <span style="color:var(--hc-green)">Git</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Sistema de <strong>control de versiones</strong> — guarda el historial de cambios de una carpeta de proyecto.</li>
+      <li>Registra qué cambió, cuándo, y te deja volver atrás si hace falta.</li>
+      <li>Corre en tu máquina, local — no necesita internet para funcionar.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">control de versiones</span>
+      <span class="hc-tag">corre local</span>
+      <span class="hc-tag amber">guarda historial completo</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>04 / 20</span></div>
+    <aside class="notes">
+      <p>Git es un sistema de control de versiones — guarda el historial de cambios de una carpeta de proyecto. Corre en su máquina, local, sin necesitar internet para funcionar.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 5. ¿QUÉ ES GITHUB? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · github</div></div>
+    <p class="hc-prompt">man github</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es <span style="color:var(--hc-green)">GitHub</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Servicio en la nube que <strong>aloja repositorios Git</strong>.</li>
+      <li>Tu repositorio vive en internet — vos (u otras personas) lo descargan desde cualquier máquina.</li>
+    </ul>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// git</div><div class="desc">Funciona SIN GitHub — podés versionar una carpeta local sin subirla a ningún lado.</div></div>
+      <div class="hc-card"><div class="lbl">// github</div><div class="desc">NO funciona sin Git — es el lugar donde alojás repositorios Git, no un sistema de versionado en sí mismo.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">git ≠ github</span>
+      <span class="hc-tag">github aloja repos en la nube</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>05 / 20</span></div>
+    <aside class="notes">
+      <p>GitHub es un servicio en la nube que aloja repositorios Git. La diferencia clave: Git funciona sin GitHub, pero GitHub no existe sin Git — es el lugar donde tu repositorio vive en internet.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 6. ¿QUÉ ES UN REPOSITORIO? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · repositorio</div></div>
+    <p class="hc-prompt">man repositorio</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es un <span style="color:var(--hc-green)">repositorio</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Carpeta de proyecto que <strong>Git está versionando</strong>. "Repo" es la forma corta.</li>
+      <li><code>.git/</code> es la base de datos real del repo (historial completo) — nunca se edita a mano, se crea sola con <code>clone</code>/<code>init</code>. Borrarla borra el historial, no tus archivos.</li>
+      <li><code>.gitignore</code> es distinto: un archivo de texto normal que le dice a Git qué <strong>nunca</strong> versionar.</li>
+      <li class="gotcha">Sin <code>.gitignore</code>, un <code>git add .</code> subiría credenciales o carpetas enteras de dependencias.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px">curso-ai-powered/
+<span class="fn">├──</span> <span class="st">.git/</span>        <span class="cm"># historial completo (oculta, no se edita a mano)</span>
+<span class="fn">├──</span> <span class="st">.gitignore</span>   <span class="cm"># qué NUNCA versionar</span>
+<span class="fn">├──</span> README.md
+<span class="fn">└──</span> CLAUDE.md
+
+<span class="cm"># .gitignore de este curso:</span>
+.env
+node_modules/</pre>
+    <div class="kw-row">
+      <span class="hc-tag">carpeta versionada por git</span>
+      <span class="hc-tag">.gitignore</span>
+      <span class="hc-tag red">nunca credenciales</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>06 / 20</span></div>
+    <aside class="notes">
+      <p>Un repositorio es una carpeta de proyecto que Git está versionando — tiene adentro una carpeta oculta .git/ con todo el historial. "Repo" es la forma corta de decirlo. .git/ es la base de datos real del repo: nunca se edita a mano, se crea sola con clone o init, y si la borran pierden el historial (no los archivos). Distinto es .gitignore: un archivo de texto normal que le dice a Git qué NUNCA versionar — en este curso, .env (credenciales, lo vemos en detalle la próxima clase) y node_modules/. Sin .gitignore, un git add . subiría eso al repositorio.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 7. COMANDOS GIT DE TRABAJO DIARIO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · git-daily</div></div>
+    <p class="hc-prompt">git --daily-commands</p>
+    <h2 class="hc-h2" style="margin-top:12px">Comandos git de <span style="color:var(--hc-green)">trabajo diario</span></h2>
+    <ul class="hc-bullets">
+      <li><code>git fetch</code> trae qué cambió en el servidor, sin tocar tus archivos todavía.</li>
+      <li><code>git status</code> muestra el estado actual de tu copia local; <code>git pull</code> trae y aplica los cambios.</li>
+      <li><code>git add .</code> marca lo que cambiaste; <code>git commit -m</code> lo guarda en el historial.</li>
+      <li class="gotcha"><code>git push</code> sube el commit — hoy no vemos <code>branch</code>, eso viene después.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">$</span> git fetch   <span class="cm"># trae qué cambió, sin tocar tus archivos todavía</span>
+<span class="kw">$</span> git status  <span class="cm"># muestra el estado actual</span>
+<span class="kw">$</span> git pull    <span class="cm"># trae los cambios y los aplica a tu copia local</span>
+<span class="kw">$</span> git add .   <span class="cm"># marca los cambios para el próximo commit</span>
+<span class="kw">$</span> git commit -m <span class="var">"mensaje"</span>  <span class="cm"># guarda ese punto en el historial</span>
+<span class="kw">$</span> git push    <span class="cm"># sube tus cambios (ya commiteados) al servidor</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">fetch</span>
+      <span class="hc-tag">status</span>
+      <span class="hc-tag">pull</span>
+      <span class="hc-tag">add</span>
+      <span class="hc-tag">commit</span>
+      <span class="hc-tag">push</span>
+      <span class="hc-tag red">hoy no: branch</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>07 / 20</span></div>
+    <aside class="notes">
+      <p>Hoy vemos seis comandos, los que van a usar todos los días: git fetch trae qué cambió sin tocar nada todavía, git status muestra el estado actual, git pull trae y aplica los cambios. git add . marca lo que cambiaron, git commit -m lo guarda en el historial con un mensaje, git push sube ese commit al servidor. No vemos branch hoy — eso viene cuando trabajen con ramas.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 8. VERIFICACIÓN: GIT STATUS ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>verify · status</div></div>
+    <p class="hc-prompt">git status</p>
+    <h2 class="hc-h2" style="margin-top:12px">Verificación: <span style="color:var(--hc-green)">git status</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">$</span> git status
+<span class="fn">On branch main</span>
+<span class="st">nothing to commit, working tree clean</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">corrélo dentro de un repo</span>
+      <span class="hc-tag amber">van a volver acá todo el curso</span>
+    </div>
+    <div class="hc-footer"><span>verificación</span><span>08 / 20</span></div>
+    <aside class="notes">
+      <p>Dentro de un repositorio, corran git status y léanme en voz alta qué dice la terminal. Vamos a volver a este comando todo el curso, así que confirmemos que lo entienden ahora.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 9. ACCIÓN: CREÁ TU REPO EN GITHUB ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · github-new</div></div>
+    <p class="hc-prompt">github.com/new</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: creá tu <span style="color:var(--hc-green)">repo en GitHub</span></h2>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// paso 1</div><div class="desc">En GitHub, crear un repositorio nuevo: privado, vacío, sin README inicial.</div></div>
+      <div class="hc-card"><div class="lbl">// paso 2</div><div class="desc">Copiar la URL del repo — botón "Code" → HTTPS.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">privado</span>
+      <span class="hc-tag">vacío</span>
+      <span class="hc-tag amber">sin readme inicial</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>09 / 20</span></div>
+    <aside class="notes">
+      <p>Vayan a GitHub y creen un repositorio nuevo: privado, vacío, sin README inicial. Cuando lo tengan, copien la URL con el botón "Code" → HTTPS.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 10. ACCIÓN: CLONÁ TU REPOSITORIO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · git-clone</div></div>
+    <p class="hc-prompt">git clone &lt;URL&gt;</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: cloná tu <span style="color:var(--hc-green)">repositorio</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">$</span> git clone <span class="var">&lt;URL de tu repo&gt;</span>
+<span class="kw">$</span> cd <span class="fn">curso-ai-powered</span>
+<span class="kw">$</span> git status
+<span class="st">nothing to commit, working tree clean</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">esto ES curso-ai-powered/</span>
+      <span class="hc-tag amber">.git ya inicializado</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>10 / 20</span></div>
+    <aside class="notes">
+      <p>En la terminal, paren en la carpeta donde va a vivir su trabajo del curso y corran git clone &lt;URL&gt;. Esa carpeta clonada ES su curso-ai-powered/ de acá en adelante — ya tiene .git inicializado. Verifiquen con git status: debería decir "nothing to commit, working tree clean".</p>
+    </aside>
+  </section>
+
+  <!-- ============ 11. ACCIÓN: TU PRIMER COMMIT ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · git-commit</div></div>
+    <p class="hc-prompt">git add . &amp;&amp; git commit</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: tu <span style="color:var(--hc-green)">primer commit</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># editen algo chico, ej. una línea en README.md</span>
+<span class="kw">$</span> git add .                 <span class="cm"># marca los cambios para el próximo commit</span>
+<span class="kw">$</span> git commit -m <span class="var">"mensaje corto"</span>  <span class="cm"># guarda ese punto en el historial</span>
+<span class="kw">$</span> git push                   <span class="cm"># sube el commit al servidor</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">flujo mínimo completo</span>
+      <span class="hc-tag amber">confirmar en github.com</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>11 / 20</span></div>
+    <aside class="notes">
+      <p>Con el repo ya clonado, hagan un cambio chico — por ejemplo una línea en README.md. Corran el flujo completo: git add . para marcar el cambio, git commit -m con un mensaje corto para guardarlo en el historial, y git push para subirlo. Este es el flujo mínimo completo del tema: editar, add, commit, push. Verifiquen en GitHub, en el navegador, que el commit llegó.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 12. ¿QUÉ ES INGENIERÍA DE PROMPT? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · prompt-engineering</div></div>
+    <p class="hc-prompt">man prompt-engineering</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es <span style="color:var(--hc-green)">ingeniería de prompt</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Práctica de escribir instrucciones <strong>claras</strong> y con <strong>contexto suficiente</strong>.</li>
+      <li>Así el asistente da el resultado que necesitás, en vez de una respuesta genérica.</li>
+      <li>No es magia — es darle al asistente lo que necesita saber para acertar a la primera.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">instrucciones claras</span>
+      <span class="hc-tag amber">con contexto suficiente</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>12 / 20</span></div>
+    <aside class="notes">
+      <p>Ahora sumamos una herramienta que van a usar todo el curso: ingeniería de prompt. Es la práctica de escribir instrucciones claras y con contexto suficiente para que el asistente dé el resultado que necesitan, en vez de una respuesta genérica.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 13. LAS 4 PIEZAS DE UN BUEN PROMPT ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>prompt · anatomy</div></div>
+    <p class="hc-prompt">prompt --anatomy</p>
+    <h2 class="hc-h2" style="margin-top:12px">Las 4 piezas de un <span style="color:var(--hc-green)">buen prompt</span></h2>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// tarea</div><div class="desc">Qué querés que haga, con un verbo concreto.</div></div>
+      <div class="hc-card"><div class="lbl">// contexto</div><div class="desc">Qué necesita saber el asistente para no inventar.</div></div>
+      <div class="hc-card"><div class="lbl">// restricciones</div><div class="desc">Qué NO tiene que hacer, o los límites del resultado.</div></div>
+      <div class="hc-card"><div class="lbl">// formato</div><div class="desc">Cómo tiene que verse el output (lista, tabla, código, etc.).</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">siempre las mismas 4</span>
+      <span class="hc-tag amber">aplican en cualquier área</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>13 / 20</span></div>
+    <aside class="notes">
+      <p>Todo buen prompt tiene las mismas 4 piezas, sin importar el tema: tarea (qué querés que haga), contexto (qué necesita saber para no inventar), restricciones (qué NO tiene que hacer) y formato (cómo tiene que verse el resultado). Dominan esto y lo aplican en cualquier área, sepan o no del tema.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 14. PROMPT VAGO VS. PROMPT CON CONTEXTO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>compare · prompt</div></div>
+    <p class="hc-prompt">diff prompt.vago prompt.bueno</p>
+    <h2 class="hc-h2" style="margin-top:12px">Prompt <span style="color:var(--hc-red)">vago</span> vs. prompt <span style="color:var(--hc-green)">con contexto</span></h2>
+    <ul class="hc-bullets">
+      <li>El prompt con contexto dice QUÉ herramienta usar, CÓMO (qué modo), y SOBRE QUÉ datos.</li>
+      <li class="gotcha">Menos margen para que el asistente invente o pida aclaraciones de más.</li>
+    </ul>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// vago</div><div class="desc">"dame el contexto del proyecto."</div></div>
+      <div class="hc-card"><div class="lbl">// con contexto</div><div class="desc">"corré la skill project-context en modo test-plan sobre lo que ya tengo en .context/business/, y contame qué journeys de negocio identificó."</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">QUÉ herramienta</span>
+      <span class="hc-tag">CÓMO (qué modo)</span>
+      <span class="hc-tag amber">SOBRE QUÉ datos</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>14 / 20</span></div>
+    <aside class="notes">
+      <p>Comparemos. Vago: "dame el contexto del proyecto". Con contexto: "corré project-context en modo test-plan sobre lo que ya tengo en .context/business/, y contame qué journeys de negocio identificó". El segundo le dice QUÉ herramienta usar, CÓMO, y SOBRE QUÉ datos.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 15. CONSEJOS PARA APLICAR INGENIERÍA DE PROMPT ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>prompt · tips</div></div>
+    <p class="hc-prompt">prompt --tips</p>
+    <h2 class="hc-h2" style="margin-top:12px">Consejos para aplicar <span style="color:var(--hc-green)">ingeniería de prompt</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>Definí el resultado observable antes de escribir el prompt.</strong> Si no podés describir un output perfecto, no lo vas a poder pedir ni evaluar.</li>
+      <li><strong>Las 4 piezas siempre son las mismas:</strong> tarea, contexto, restricciones, formato.</li>
+      <li><strong>El "qué NO hacer" pesa tanto como el "qué hacer".</strong> Frenar errores típicos evita que el modelo invente.</li>
+      <li><strong>Usá al modelo para investigar antes de pedirle que ejecute.</strong> No necesitás dominar el dominio, necesitás saber qué preguntar.</li>
+      <li class="gotcha"><strong>Iterá y guardá lo que funciona.</strong> Un prompt se prueba, se ajusta, y se convierte en plantilla reusable.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">observable</span>
+      <span class="hc-tag">4 piezas</span>
+      <span class="hc-tag">qué NO hacer</span>
+      <span class="hc-tag amber">iterar y guardar</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>15 / 20</span></div>
+    <aside class="notes">
+      <p>Cinco consejos para llevarse hoy. Uno: definan el resultado observable antes de escribir el prompt — si no pueden describir cómo se ve un output perfecto, no lo van a poder pedir ni evaluar. Dos: las 4 piezas siempre son las mismas, tarea, contexto, restricciones, formato. Tres: el "qué NO hacer" pesa tanto como el "qué hacer" — frenar errores típicos evita que el modelo invente. Cuatro: usen al modelo para investigar antes de pedirle que ejecute — no necesitan dominar el dominio, necesitan saber preguntar qué les falta saber. Cinco: iteren y guarden lo que funciona — un prompt se prueba, se ajusta, y se convierte en plantilla reusable.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 16. ¿QUÉ ES UNA SKILL? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · skill</div></div>
+    <p class="hc-prompt">man skill</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es una <span style="color:var(--hc-green)">skill</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Paquete de instrucciones que le enseña al asistente a hacer una <strong>tarea específica</strong>.</li>
+      <li>La hace de forma <strong>reproducible</strong> — en vez de explicarle todo de cero cada vez.</li>
+      <li>El asistente la lee cuando la necesita, no en cada mensaje.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">paquete de instrucciones</span>
+      <span class="hc-tag amber">reproducible</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>16 / 20</span></div>
+    <aside class="notes">
+      <p>Ese último consejo, guardar lo que funciona como plantilla reusable, es exactamente lo que resuelve una skill. Una skill es un paquete de instrucciones que le enseña al asistente una tarea específica de forma reproducible, en vez de explicarle todo de cero cada vez que la necesitan.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 17. PROMPT VS. SKILL: LA DIFERENCIA ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>compare · prompt-vs-skill</div></div>
+    <p class="hc-prompt">diff prompt.md skill/</p>
+    <h2 class="hc-h2" style="margin-top:12px">Prompt vs. skill: <span style="color:var(--hc-green)">la diferencia</span></h2>
+    <div class="hc-grid-2">
+      <div class="hc-card"><div class="lbl">// prompt</div><div class="desc">Instrucción de un solo uso. Lo escribís, lo mandás, se pierde al cerrar la conversación.</div></div>
+      <div class="hc-card"><div class="lbl">// skill</div><div class="desc">Ese mismo trabajo ya afinado, empaquetado. Se guarda en disco, persiste entre conversaciones, el asistente decide solo cuándo aplicarla.</div></div>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag red">prompt: se pierde</span>
+      <span class="hc-tag amber">skill: persiste</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>17 / 20</span></div>
+    <aside class="notes">
+      <p>¿En qué se diferencia de un prompt? Un prompt es de un solo uso: lo escriben, lo mandan, se pierde al cerrar la conversación. Una skill toma ese mismo trabajo de ingeniería de prompt ya afinado y lo empaqueta para reusar: se guarda en disco, persiste entre conversaciones, y el asistente decide solo cuándo aplicarla.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 18. ACCIÓN: MIRÁ DOS SKILLS REALES ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>explore · project-context + project-discovery</div></div>
+    <p class="hc-prompt">ls .agents/skills/</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: mirá dos <span style="color:var(--hc-green)">skills reales</span></h2>
+    <ul class="hc-bullets">
+      <li><code>project-context</code> — genera/actualiza los mapas de negocio (datos, funcionalidades, API) y el plan maestro de pruebas. Se regenera cada sprint.</li>
+      <li><code>project-discovery</code> — genera el glosario de dominio y el mapa de personas/roles: el vocabulario base que las demás skills asumen resuelto.</li>
+      <li class="gotcha">Esto es un resumen — para profundizar un modo hay que leer su archivo completo en <code>references/</code>.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px">.agents/skills/
+<span class="fn">├──</span> <span class="st">project-context/</span>    <span class="cm"># SKILL.md + references/ (data, features, api, test-plan)</span>
+<span class="fn">└──</span> <span class="st">project-discovery/</span>  <span class="cm"># SKILL.md + references/ (glossary, personas)</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">forma + resumen, no uso</span>
+      <span class="hc-tag red">uso real: tema 01a</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>18 / 20</span></div>
+    <aside class="notes">
+      <p>Abran .agents/skills/project-context/ y .agents/skills/project-discovery/. project-context genera los mapas de negocio y el plan de pruebas, se regenera cada sprint. project-discovery genera el glosario de dominio y el mapa de personas, vocabulario base para las demás skills. Ambas tienen SKILL.md + references/. Hoy vemos la forma y un resumen de qué hace cada una — para profundizar un modo hay que leer su references/ completo por su cuenta. El uso real (correr un modo, aprobar el diff) es la próxima clase.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 19. CÓMO SE ARMA UNA BUENA SKILL ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>skill · best-practices</div></div>
+    <p class="hc-prompt">skill --best-practices</p>
+    <h2 class="hc-h2" style="margin-top:12px">Cómo se arma una <span style="color:var(--hc-green)">buena skill</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>Paquete reutilizable, no instrucción de una sola vez.</strong> Carpeta con <code>SKILL.md</code>, persiste entre conversaciones.</li>
+      <li><strong>La descripción es la parte más crítica.</strong> Es lo único que el asistente mira para decidir si aplica; si es débil, nunca se activa.</li>
+      <li><strong>Se carga en capas.</strong> Nombre y descripción primero, cuerpo completo después, recursos extra solo si hacen falta.</li>
+      <li><strong>Instrucciones claras, en imperativo, con ejemplos.</strong> Un buen input → output vale más que párrafos de reglas.</li>
+      <li class="gotcha"><strong>Se crea igual que un buen prompt:</strong> se prueba, se evalúa, se ajusta — pero queda como activo permanente.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">reutilizable</span>
+      <span class="hc-tag amber">descripción crítica</span>
+      <span class="hc-tag">carga en capas</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>19 / 20</span></div>
+    <aside class="notes">
+      <p>Cinco cosas que hacen que una skill funcione. Uno: es un paquete reutilizable, no una instrucción de una sola vez — se guarda como carpeta con un SKILL.md y persiste entre conversaciones. Dos: la descripción es la parte más crítica — es lo único que el asistente mira para decidir si aplica; si es débil, la skill nunca se activa. Tres: se carga en capas — nombre y descripción primero, cuerpo completo después, recursos extra solo si hacen falta. Cuatro: instrucciones claras, en modo imperativo, con ejemplos — un buen ejemplo de input-output vale más que párrafos de reglas. Cinco: se crea igual que un buen prompt, se prueba y se ajusta — la diferencia es que una vez afinada queda guardada como activo permanente.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 20. CIERRE Y CHECKLIST ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>EOF</div></div>
+    <p class="hc-prompt">setup --status</p>
+    <h2 class="hc-h2" style="margin-top:12px">Checklist del <span style="color:var(--hc-green)">día</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px">[<span class="st">OK</span>] Navegación cd / ls / cd ..
+[<span class="st">OK</span>] Git, GitHub y repositorio explicados
+[<span class="st">OK</span>] curso-ai-powered/ clonado (.git inicializado)
+[<span class="st">OK</span>] fetch / status / pull / add / commit / push corridos
+[<span class="st">OK</span>] Prompt "mejorado" con las 4 piezas
+[<span class="st">OK</span>] Skill distinguida de un prompt suelto
+[<span class="st">OK</span>] project-context y project-discovery: sabés qué hace cada una
+
+<span class="cm"># próxima clase: tema 00c</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">repo real, no de juguete</span>
+      <span class="hc-tag amber">próxima clase: 00c</span>
+    </div>
+    <div class="hc-footer"><span>tema-00b · AI-Powered QA</span><span>20 / 20</span></div>
+    <aside class="notes">
+      <p>Repasemos: navegan carpetas con cd/ls/cd .., explican Git/GitHub/repositorio con sus propias palabras, tienen curso-ai-powered/ clonado desde su propio repo, corrieron el flujo mínimo completo (fetch/status/pull para sincronizar, add/commit/push para subir sus propios cambios), aplicaron las 4 piezas para escribir un prompt mejorado, distinguieron una skill de un prompt suelto, y saben qué hace project-context y qué hace project-discovery sin haberlas usado todavía. La próxima clase las usamos de verdad.</p>
+    </aside>
+  </section>
+
+</div>
+
+<div style="position:fixed;bottom:12px;left:12px;font-size:11px;color:#484f5866;z-index:100;pointer-events:none">
+  S modo orador · ← → navegar · F pantalla completa · O resumen
+</div>
+
+<script src="assets/runtime.js"></script>
+</body>
+</html>
