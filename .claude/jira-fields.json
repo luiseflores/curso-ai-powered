@@ -1,0 +1,6 @@
+{
+  "acceptance_criteria": { "id": "customfield_10076", "type": "string", "name": "Criterios de aceptación" },
+  "business_rules_specification": { "id": "customfield_10078", "type": "string", "name": "Reglas de negocio" },
+  "scope": { "id": "customfield_10079", "type": "string", "name": "Alcance" },
+  "out_of_scope": { "id": "customfield_10080", "type": "string", "name": "Fuera de alcance" }
+}

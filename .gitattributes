@@ -1,0 +1,13 @@
+# Fuerza finales de línea LF en todos los sistemas operativos.
+# En Windows, Git convierte a CRLF por defecto; bash (direnv, Git Bash) lee el \r como parte
+# del valor y rompe .envrc o las variables que carga.
+* text=auto eol=lf
+
+# Binarios: nunca normalizar.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.pdf  binary

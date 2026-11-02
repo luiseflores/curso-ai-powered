@@ -1,0 +1,10 @@
+{
+  "name": "qa-workspace",
+  "private": true,
+  "scripts": {
+    "claude": "dotenv -o -e .env -- claude"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0"
+  }
+}

@@ -1,0 +1,49 @@
+# .claude/jira-required.yaml
+#
+# Checklist de custom fields y statuses que este repo necesita en el proyecto Jira.
+#
+# Solo lista CUSTOM FIELDS — campos nativos de Jira (Título/Summary, Descripción/Description,
+# Asignado/Assignee, Prioridad/Priority, Labels, Sprint, Parent) no se mencionan acá: `acli` ya
+# los resuelve por nombre fijo, sin necesitar discovery de ID. Auditoría con
+# .claude/skills/acli/references/jira-check.md.
+#
+# Los IDs customfield_NNNNN se descubren con el ticket modelo y se guardan a mano en
+# .claude/jira-fields.json. Sin `fallback:`, sin `link_types` y sin slugs {{jira.*}}: la
+# configuración se mantiene mínima a propósito.
+#
+# Tipos: `paragraph` = campo multi-línea de Jira (Paragraph, se publica en ADF con
+# .claude/skills/acli/scripts/md-to-adf.ts). `number` = campo numérico.
+
+work_types:
+  epic:
+    jira_issue_type: Epic
+    required_statuses:
+      BACKLOG: { category: to_do }
+      REFINAMIENTO: { category: in_progress }
+      LISTA PARA DESARROLLAR: { category: in_progress }
+      EN DESARROLLO: { category: in_progress }
+      LISTA PARA PROBAR: { category: in_progress }
+      LISTA PARA DESPLEGAR: { category: in_progress }
+      CERRADA: { category: done }
+      ABORTADA: { category: done }
+    required_fields: {}
+
+  story:
+    jira_issue_type: Story
+    required_statuses:
+      BACKLOG: { category: to_do }
+      REFINAMIENTO: { category: in_progress }
+      LISTA PARA DESARROLLAR: { category: in_progress }
+      EN DESARROLLO: { category: in_progress }
+      LISTA PARA PROBAR: { category: in_progress }
+      EN PRUEBAS: { category: in_progress }
+      EN ESPERA RETESTING: { category: in_progress }
+      LISTA PARA DESPLEGAR: { category: in_progress }
+      ABORTADA: { category: done }
+      CERRADA: { category: done }
+    required_fields:
+      business_rules_specification: { type: paragraph, name: "Reglas de negocio" }
+      scope: { type: paragraph, name: "Alcance" }
+      out_of_scope: { type: paragraph, name: "Fuera de alcance" }
+      acceptance_criteria: { type: paragraph, name: "Criterios de aceptación" }
+      story_points: { type: number, name: "Story Points", note: "confirmar, no crear — viene por defecto con la plantilla Scrum/Kanban de Jira Software" }

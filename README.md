@@ -9,8 +9,7 @@ correspondientes a ese tema.
 Temas dictados: **00a** y **00b**.
 
 - **Tema 00a — Terminal, CLI y primer asistente IA:** instalaste Warp, Node.js y un runner de IA
-  (Claude Code CLI o Codex CLI). Este repo tiene `README.md` y `AGENTS.md`/`CLAUDE.md` (memoria
-  de IA).
+  (Claude Code CLI o Codex CLI). Este repo tiene `README.md` y `CLAUDE.md` (memoria de IA).
 - **Tema 00b — Git, GitHub y Skill:** este repo es tu clon de GitHub, ya con `.git` inicializado.
   Trabajás con el flujo diario `git fetch` → `git status` → `git pull` → `git add` →
   `git commit` → `git push`. También viste ingeniería de prompt (Tarea, Contexto, Restricciones,
@@ -20,7 +19,7 @@ Temas dictados: **00a** y **00b**.
 
 ```
 curso-ai-powered/
-├── README.md, AGENTS.md, CLAUDE.md   # este archivo y la memoria de tu asistente de IA
+├── README.md, CLAUDE.md              # este archivo y la memoria de tu asistente de IA
 ├── .gitignore                        # qué NO versiona Git (.env, node_modules/)
 ├── temario/                          # material de cada clase ya dictada
 │   ├── 00a-terminal-cli-ia/          # contenido.md, guion-diapositivas.md, deck/ (presentación)
