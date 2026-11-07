@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tema 00c — Jira conectado</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="tpl-tema-00c">
+<div class="deck">
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="slide is-active">
+    <div class="hc-grid"></div>
+    <div class="hc-vignette"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>~/curso-ai-powered · zsh · tema-00c</div></div>
+    <div style="margin:auto 0">
+      <p class="hc-prompt">whoami --jira-conectado</p>
+      <h1 class="hc-h1 anim-fade-up" data-anim="fade-up">JIRA<br>CONECTADO<span class="hc-cursor"></span></h1>
+      <ul class="hc-bullets">
+        <li>Conectamos tu asistente con Jira: <code>acli</code> como camino principal, Atlassian MCP de respaldo.</li>
+        <li>Preparamos el terreno: <code>.env</code>, Bun, <code>bun run claude</code> y Context7.</li>
+        <li>La configuración llega con <code>git pull</code>; vos instalás y completás tu <code>.env</code>.</li>
+        <li>Aprendés a dejar el Jira de tu empresa listo: 4 campos de Story y sus IDs en <code>.claude/jira-fields.json</code>.</li>
+      </ul>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">mcp</span>
+      <span class="hc-tag">.env</span>
+      <span class="hc-tag">bun run claude</span>
+      <span class="hc-tag">bun</span>
+      <span class="hc-tag">api-token</span>
+      <span class="hc-tag amber">acli</span>
+      <span class="hc-tag amber">atlassian-mcp</span>
+      <span class="hc-tag amber">custom fields</span>
+      <span class="hc-tag amber">jira-fields.json</span>
+    </div>
+    <div class="hc-footer"><span>tema-00c · AI-Powered QA</span><span>01 / 18</span></div>
+    <aside class="notes">
+      <p>Hoy conectamos tu asistente con Jira: acli como camino principal y Atlassian MCP como respaldo. Antes preparamos el terreno: qué es un MCP, el archivo .env, bun run claude para que Claude reciba tus variables, Context7 para documentación y Bun para el conversor de texto de Jira. La configuración del repo les llega con git pull; ustedes instalan las herramientas y completan su .env. Al final de la clase su asistente lee el proyecto Jira de práctica, y saben preparar el Jira de su empresa: 4 campos de Story y sus IDs en .claude/jira-fields.json, listo para crear historias en el 00d.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 2. ¿QUÉ ES UN MCP? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · mcp</div></div>
+    <p class="hc-prompt">man mcp</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es un <span style="color:var(--hc-green)">MCP</span>?</h2>
+    <ul class="hc-bullets">
+      <li><strong>Model Context Protocol</strong> — le da al asistente acceso directo a herramientas y datos externos (bases de datos, APIs, documentación).</li>
+      <li>El asistente <strong>CONSULTA</strong> un MCP directamente — sin que vos copies/pegues información a mano en cada mensaje.</li>
+      <li>Cada MCP expone acciones específicas: ej. leer un ticket de Jira, correr una query de solo lectura.</li>
+      <li>Corre como proceso aparte — lo configurás una vez, el asistente lo usa cuando lo necesita.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">acceso a datos externos</span>
+      <span class="hc-tag amber">se configura una vez</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>02 / 18</span></div>
+    <aside class="notes">
+      <p>MCP = Model Context Protocol: le da al asistente acceso directo a herramientas y datos externos. El asistente CONSULTA el MCP directamente, sin que vos copies/pegues información a mano. Cada MCP expone acciones específicas — ej: leer un ticket, correr una query de solo lectura. Corre como proceso aparte: lo configurás una vez, el asistente lo usa cuando lo necesita.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 3. MCP VS CLI ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>diff · mcp cli</div></div>
+    <p class="hc-prompt">diff mcp cli</p>
+    <h2 class="hc-h2" style="margin-top:12px"><span style="color:var(--hc-green)">MCP</span> vs <span style="color:var(--hc-cyan)">CLI</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>CLI:</strong> el asistente <strong>EJECUTA</strong> un programa como comando de terminal (<code>acli</code>, <code>git</code>).</li>
+      <li><strong>MCP:</strong> el asistente <strong>CONSULTA</strong> un servidor directamente, sin pasar por la terminal.</li>
+      <li>Regla del curso: el CLI siempre va primero — Atlassian CLI antes que Atlassian MCP, Playwright CLI antes que Playwright MCP.</li>
+      <li class="gotcha">El MCP es respaldo/fallback — no reemplaza al CLI como camino principal.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">cli = ejecutar</span>
+      <span class="hc-tag">mcp = consultar</span>
+      <span class="hc-tag red">mcp no reemplaza al cli</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>03 / 18</span></div>
+    <aside class="notes">
+      <p>CLI: el asistente EJECUTA un programa como comando de terminal. MCP: el asistente CONSULTA un servidor directamente, sin pasar por la terminal. Regla del curso: CLI siempre primero. El MCP es respaldo/fallback — no reemplaza al CLI como camino principal.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 4. ACCIÓN: CONTEXT7 CLI + SKILL ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>install · context7</div></div>
+    <p class="hc-prompt">npx ctx7 setup --cli --claude</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: <span style="color:var(--hc-green)">Context7 CLI + skill</span></h2>
+    <ul class="hc-bullets">
+      <li>Instala la skill <strong><code>find-docs</code></strong>: le enseña al asistente a correr <code>ctx7</code> en la terminal. No es un MCP.</li>
+      <li><strong>Skill del repo</strong> (<code>.claude/skills/</code>): viaja con el proyecto, la ve todo el equipo. En el 00b la viste en <code>.agents/skills/</code> (estándar abierto).</li>
+      <li><strong>Skill global</strong> (<code>~/.claude/skills/find-docs/</code>): solo en tu máquina, sirve en cualquier proyecto.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># instalar</span>
+<span class="fn">npx ctx7 setup</span> --cli --claude
+<span class="cm"># paso 1: nombre de librería → ID</span>
+<span class="fn">npx ctx7 library</span> react <span class="st">"How to clean up useEffect..."</span>   <span class="cm"># → /facebook/react</span>
+<span class="cm"># paso 2: ID → documentación actualizada</span>
+<span class="fn">npx ctx7 docs</span> /facebook/react <span class="st">"How to clean up useEffect..."</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">cli primero, caso real</span>
+      <span class="hc-tag amber">skill global: find-docs</span>
+      <span class="hc-tag">library → docs</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>04 / 18</span></div>
+    <aside class="notes">
+      <p>Primer caso real de "CLI primero": Context7 trae documentación actualizada de librerías. No es un MCP: el setup instala la skill find-docs, que le enseña al asistente a correr comandos ctx7 en la terminal. Skill del repo (.claude/skills): viaja con el proyecto; en el 00b la vieron en .agents/skills, el estándar abierto que leen Codex y otros, pero Claude Code usa .claude/skills. Skill global (~/.claude/skills/find-docs): solo en tu máquina, sirve en cualquier proyecto. Instalación: npx ctx7 setup --cli --claude; se loguean en Context7 en el navegador y la API key la genera y guarda el comando. La skill trabaja en 2 pasos: library convierte el nombre de la librería en un ID (react → /facebook/react) y docs trae la documentación de ese ID. Verificación: npx ctx7 library react en la terminal, y después pedirle docs al asistente y confirmar que corre ctx7.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 5. ¿QUÉ ES .ENV? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · dotenv</div></div>
+    <p class="hc-prompt">cat .env.example</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es <span style="color:var(--hc-green)">.env</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Archivo de <strong>variables de entorno</strong> — ahí van API Tokens, URLs de bases de datos, credenciales.</li>
+      <li>Nunca se escriben credenciales directamente en el código ni en archivos versionados por git.</li>
+      <li><code>.env</code> normalmente está en <code>.gitignore</code> — no se sube al repositorio.</li>
+      <li><code>.env.example</code> SÍ se versiona: mismo formato, sin valores reales.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">credenciales acá, no en el código</span>
+      <span class="hc-tag amber">.env no se sube al repo</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>05 / 18</span></div>
+    <aside class="notes">
+      <p>Archivo de variables de entorno: ahí van API Tokens, URLs de bases de datos, credenciales. Nunca se escriben credenciales en el código ni en archivos versionados. .env va en .gitignore — no se sube al repo. .env.example SÍ se versiona: mismo formato, sin valores reales.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 6. ACCIÓN: INSTALAR BUN ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>install · bun</div></div>
+    <p class="hc-prompt">install bun</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: instalar <span style="color:var(--hc-green)">Bun</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>Runtime y gestor de paquetes de JavaScript/TypeScript</strong>, como Node.js + npm pero más rápido.</li>
+      <li>Dentro del repo, todo con Bun: <code>bun install</code> y <code>bun run claude</code> (próxima slide). npm queda para herramientas globales.</li>
+      <li>Lo usa el conversor de la skill <code>acli</code>: <code>md-to-adf.ts</code>.</li>
+      <li>Jira guarda los campos largos en <strong>ADF</strong> (JSON), no en Markdown: el conversor traduce.</li>
+      <li class="gotcha">Verificación: <code>bun --version</code>. Si no responde, cerrá y abrí la terminal.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># lo que escribís (Markdown)</span>
+&#96;&#96;&#96;gherkin
+Escenario: cupón válido
+  Dado un carrito con $100
+&#96;&#96;&#96;
+   <span class="fn">↓</span> bun .claude/skills/acli/scripts/md-to-adf.ts
+<span class="cm"># lo que guarda Jira (ADF)</span>
+{ <span class="st">"type"</span>: <span class="st">"codeBlock"</span>, <span class="st">"attrs"</span>: { <span class="st">"language"</span>: <span class="st">"gherkin"</span> }, <span class="st">"content"</span>: [ ... ] }</pre>
+    <div class="kw-row">
+      <span class="hc-tag">runtime + gestor de paquetes</span>
+      <span class="hc-tag amber">markdown → adf</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>06 / 18</span></div>
+    <aside class="notes">
+      <p>Bun es un runtime y gestor de paquetes de JavaScript y TypeScript, como Node.js más npm pero más rápido. Dentro del repo usamos siempre Bun: bun install y bun run claude, que vemos en la próxima slide; npm queda para instalar herramientas globales como Claude Code. Lo necesitamos para el conversor de la skill acli, md-to-adf.ts. Jira guarda los campos largos, como los criterios de aceptación, en un formato JSON llamado ADF, no en Markdown: ustedes escriben Markdown y el conversor lo traduce. Instálenlo siguiendo la guía y verifiquen con bun --version; si no responde, cierren y abran la terminal.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 7. ACCIÓN: BUN RUN CLAUDE ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>install · bun run claude</div></div>
+    <p class="hc-prompt">bun run claude</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: <span style="color:var(--hc-green)">bun run claude</span></h2>
+    <ul class="hc-bullets">
+      <li>Ni el asistente ni las skills leen <code>.env</code> solos: usan las variables que tiene Claude al <strong>arrancar</strong>.</li>
+      <li><code>package.json</code> (llegó con el <code>git pull</code>): scripts y dependencias del repo. El script <code>claude</code> abre Claude con tu <code>.env</code>.</li>
+      <li class="gotcha"><code>bun run</code> carga <code>.env</code> solo para programas de Bun: por eso el script usa <code>dotenv-cli</code>.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># una sola vez: instala dotenv-cli en node_modules/ (ignorada por git)</span>
+<span class="fn">bun</span> install
+<span class="cm"># siempre que abras Claude</span>
+<span class="fn">bun</span> run claude
+<span class="cm"># lo que hace una skill por detrás, ya con tus variables</span>
+<span class="fn">curl</span> -u <span class="st">"$ATLASSIAN_EMAIL:$ATLASSIAN_API_TOKEN"</span> .../myself | <span class="fn">jq</span> .displayName</pre>
+    <div class="kw-row">
+      <span class="hc-tag">claude a secas = sin variables</span>
+      <span class="hc-tag amber">repo profesional: .env + ${...}</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>07 / 18</span></div>
+    <aside class="notes">
+      <p>Problema: ni el asistente ni las skills leen .env solos. Las skills corren comandos con variables, como curl con ATLASSIAN_EMAIL y ATLASSIAN_API_TOKEN, y los ${...} de .mcp.json se completan con lo que tiene Claude al arrancar. Sin variables, fallan. package.json es donde el repo declara scripts y dependencias; el script claude abre Claude con tu .env cargado. package.json les llegó con el git pull, no lo crean. Acción: bun install una sola vez, que instala dotenv-cli en node_modules, ignorada por git; después bun run claude siempre. bun run carga .env solo para programas de Bun, por eso el script usa dotenv-cli para pasárselo a Claude. Gotcha: claude a secas arranca sin variables; si cambiás .env, salís y volvés a abrir. En un repo profesional, .env + .env.example + ${...} es el patrón estándar.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 8. ¿QUÉ ES JIRA? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · jira</div></div>
+    <p class="hc-prompt">man jira</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es <span style="color:var(--hc-green)">Jira</span>? + repaso Scrum</h2>
+    <ul class="hc-bullets">
+      <li>La herramienta de tickets que ya usás en tu trabajo: el curso <strong>no la enseña desde cero</strong>, la conecta a tu asistente.</li>
+      <li>Repaso mínimo de los tipos de ticket: los vas a crear en el Tema 00d.</li>
+      <li>Una épica agrupa historias; una historia entra en un sprint.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn">SPRINT  </span>  período fijo (≈2 semanas)     <span class="st">"Sprint 14: 6 al 20 de octubre"</span>
+<span class="fn">ÉPICA   </span>  módulo o capacidad grande     <span class="st">"Carrito y pagos"</span>
+<span class="fn">HISTORIA</span>  necesidad de un usuario       <span class="st">"Carrito | Aplicar cupón"</span>
+<span class="fn">TAREA   </span>  trabajo técnico               <span class="st">"Actualizar la librería de pagos"</span>
+<span class="fn">BUG     </span>  comportamiento no esperado    <span class="st">"El total no descuenta el cupón"</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">ya la conocés</span>
+      <span class="hc-tag amber">se crean en el 00d</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>08 / 18</span></div>
+    <aside class="notes">
+      <p>Jira es la herramienta de tickets que ya usan en su trabajo: el curso no la enseña desde cero, la conecta a su asistente. Repaso mínimo de lo que van a crear en el 00d. Sprint: período fijo, normalmente dos semanas. Épica: un módulo grande, por ejemplo Carrito y pagos. Historia: una necesidad de un usuario que entra en un sprint, por ejemplo Carrito, aplicar cupón. Tarea: trabajo técnico. Bug: un comportamiento que no es el esperado.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 9. ¿QUÉ ES UN API TOKEN? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · api-token</div></div>
+    <p class="hc-prompt">man api-token</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es un <span style="color:var(--hc-green)">API Token</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Clave de acceso que <strong>reemplaza usuario+contraseña</strong> para que una herramienta se autentique.</li>
+      <li>Se genera desde la cuenta del servicio — para Atlassian: <code>id.atlassian.com</code>.</li>
+      <li>Se puede <strong>revocar</strong> sin cambiar tu contraseña real, si se filtra.</li>
+      <li class="gotcha">Va en tu <code>.env</code> — nunca se pega directo en un comando ni se comparte por chat.</li>
+    </ul>
+    <div class="kw-row">
+      <span class="hc-tag">reemplaza usuario+contraseña</span>
+      <span class="hc-tag amber">revocable</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>09 / 18</span></div>
+    <aside class="notes">
+      <p>Clave de acceso que reemplaza usuario+contraseña para que una herramienta se autentique. Se genera desde la cuenta del servicio — para Atlassian: id.atlassian.com. Se puede revocar sin cambiar tu contraseña real, si se filtra. Va en .env — nunca se pega directo en un comando ni se comparte por chat.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 10. ACCIÓN: INSTALAR ACLI ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>install · acli</div></div>
+    <p class="hc-prompt">install acli jq</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: instalar <span style="color:var(--hc-green)">acli</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>CLI oficial de Atlassian</strong>: lee y actualiza tickets de Jira desde la terminal. Camino principal.</li>
+      <li><code>jq</code> filtra el JSON que devuelve <code>acli</code>: lo usás hoy con el ticket modelo.</li>
+      <li>Login interactivo, eligiendo <strong>API token</strong>. Después, las 3 variables <code>ATLASSIAN_*</code> a tu <code>.env</code>.</li>
+      <li class="gotcha">En la terminal <code>echo "$ATLASSIAN_API_TOKEN"</code> sale vacío: solo <code>bun run claude</code> carga <code>.env</code>.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># 1. API Token en id.atlassian.com (cuenta invitada al sitio de práctica)</span>
+<span class="kw">$</span> acli jira auth login            <span class="cm"># sitio, email y token</span>
+<span class="kw">$</span> acli jira workitem search --jql <span class="st">"project = <span class="var">CLAVE</span>"</span>   <span class="cm"># verificación</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">cli oficial de atlassian</span>
+      <span class="hc-tag amber">terminal ≠ .env</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>10 / 18</span></div>
+    <aside class="notes">
+      <p>Generen su API Token en id.atlassian.com, con la cuenta que invité al sitio de práctica. Instalen acli y jq siguiendo la guía; jq filtra el JSON que devuelve acli y lo vamos a usar hoy con el ticket modelo. Logueen acli en modo interactivo, eligiendo API token, y después completen las tres variables ATLASSIAN en su .env. Ojo: en la terminal no sirve echo de la variable, porque la terminal no lee .env; solo bun run claude lo carga. Verificación: acli jira workitem search con la clave del proyecto de práctica lista tickets.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 11. ACCIÓN: ATLASSIAN MCP ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>install · atlassian-mcp</div></div>
+    <p class="hc-prompt">install atlassian-mcp</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: <span style="color:var(--hc-green)">Atlassian MCP</span></h2>
+    <ul class="hc-bullets">
+      <li>Respaldo de <code>acli</code>: mismo acceso a Jira, vía MCP. Corre con <code>uv</code> (lo instalás con la guía, sin aprender Python).</li>
+      <li><code>.mcp.json</code> llegó con el repo: los <code>${...}</code> son referencias a tu <code>.env</code>, no credenciales.</li>
+      <li>Verificación: <code>bun run claude</code> → aceptar los MCP → <code>/mcp</code> muestra <code>atlassian</code> connected.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># .mcp.json: bloque atlassian (mismo API Token que acli)</span>
+<span class="st">"atlassian"</span>: {
+  <span class="st">"command"</span>: <span class="st">"uvx"</span>, <span class="st">"args"</span>: [<span class="st">"mcp-atlassian"</span>],
+  <span class="st">"env"</span>: { <span class="st">"JIRA_API_TOKEN"</span>: <span class="st">"${ATLASSIAN_API_TOKEN}"</span>, <span class="cm">...</span> }
+}</pre>
+    <div class="kw-row">
+      <span class="hc-tag">respaldo de acli</span>
+      <span class="hc-tag amber">mismo api token</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>11 / 18</span></div>
+    <aside class="notes">
+      <p>Es el respaldo de acli: mismo acceso a Jira, vía MCP en vez de CLI. Corre con uv, que instalan con la guía sin necesidad de saber Python. El .mcp.json les llegó con el repo: el bloque atlassian toma las variables de su .env con ${...}, que son referencias, no credenciales, y reusa el mismo API Token. Abran bun run claude, acepten los MCP del proyecto y confirmen con /mcp que atlassian está connected. Después pídanle al asistente el mismo ticket vía MCP y comparen contra acli.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 12. ¿QUÉ ES UN CUSTOM FIELD Y UN WORKFLOW? ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · jira-config</div></div>
+    <p class="hc-prompt">man custom-field workflow</p>
+    <h2 class="hc-h2" style="margin-top:12px">¿Qué es un <span style="color:var(--hc-green)">custom field</span> y un <span style="color:var(--hc-cyan)">workflow</span>?</h2>
+    <ul class="hc-bullets">
+      <li>Un proyecto Jira se puede <strong>configurar</strong>, no solo usar: campos propios y estados propios.</li>
+      <li><strong>Custom field:</strong> un campo que agrega el equipo, no viene de fábrica (ej. "Criterios de aceptación").</li>
+      <li><strong>Workflow:</strong> la secuencia de estados de un ticket; cada equipo define la suya.</li>
+      <li>En un proyecto team-managed lo configurás vos, sin ser admin de toda la instancia.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># workflow de Story en este curso (jira-required.yaml)</span>
+BACKLOG <span class="fn">→</span> REFINAMIENTO <span class="fn">→</span> LISTA PARA DESARROLLAR <span class="fn">→</span> ... <span class="fn">→</span> CERRADA</pre>
+    <div class="kw-row">
+      <span class="hc-tag">custom field</span>
+      <span class="hc-tag amber">workflow / statuses</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>12 / 18</span></div>
+    <aside class="notes">
+      <p>Un proyecto Jira se puede configurar, no solo usar: tiene campos propios y estados propios. Un custom field es un campo que agrega el equipo, no viene de fábrica; por ejemplo, Criterios de aceptación. El workflow es la secuencia de estados de un ticket, y cada equipo define la suya: la de Story en este curso arranca en BACKLOG, pasa por REFINAMIENTO y termina en CERRADA. En un proyecto team-managed lo configuran ustedes, sin ser admin de toda la instancia.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 13. ACCIÓN: CREAR CAMPOS Y STATUSES ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · crear-campos</div></div>
+    <p class="hc-prompt">jira ui --configurar-proyecto</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción manual: crear <span style="color:var(--hc-green)">campos y statuses</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>4 campos de Story, tipo Párrafo (Paragraph)</strong>: Criterios de aceptación, Reglas de negocio, Alcance, Fuera de alcance.</li>
+      <li><strong>Por qué Párrafo:</strong> una línea corta a los 255 caracteres; tres escenarios de AC no entran. Párrafo se guarda en ADF: por eso Bun.</li>
+      <li class="gotcha">Status inicial: renombrá "Por hacer" a <code>BACKLOG</code> y dejá llegar a <code>REFINAMIENTO</code> desde cualquier status.</li>
+      <li>Story Points ya viene con la plantilla Scrum/Kanban: solo confirmás que esté.</li>
+      <li>En el proyecto de práctica ya está hecho: lo repetís en el Jira de tu empresa (guía, Paso 9). Company-managed: lo crea un admin.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># team-managed: Configuración del proyecto → Tipos de work item → Story</span>
+<span class="fn">CAMPOS  </span>  4 × Párrafo, nombres exactos de jira-required.yaml
+<span class="fn">WORKFLOW</span>  statuses de Story y Épica (BACKLOG inicial → REFINAMIENTO)
+<span class="cm"># campos de Bug y de pruebas (ATP/ATR): Tema 02</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">tipo párrafo</span>
+      <span class="hc-tag amber">story points: confirmar, no crear</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>13 / 18</span></div>
+    <aside class="notes">
+      <p>Esto se hace a mano, en la configuración del proyecto Jira. En team-managed: Configuración del proyecto, Tipos de work item, Story. Creen 4 campos de tipo Párrafo con los nombres exactos de jira-required.yaml: Criterios de aceptación, Reglas de negocio, Alcance y Fuera de alcance. Por qué Párrafo: un campo de una línea corta a los 255 caracteres y tres escenarios de criterios de aceptación no entran. Párrafo se guarda en ADF, y por eso instalaron Bun. Sumen los statuses de Story y Épica, como mínimo BACKLOG y REFINAMIENTO, que usa el 00d. Gotcha: renombren Por hacer a BACKLOG para que sea el status inicial, y permitan llegar a REFINAMIENTO desde cualquier status; si no, el 00d no puede mover la historia. Story Points ya viene con la plantilla: solo confirmen que esté. En el proyecto de práctica esto ya está hecho y se los muestro en pantalla; ustedes lo repiten en el Jira de su empresa con el Paso 9 de la guía. Si su proyecto es company-managed, lo crea un admin: la guía dice qué pedirle. Los campos de Bug y de pruebas llegan en el Tema 02.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 14. GOTCHA: ID NUMÉRICO DEL CAMPO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>gotcha · acli-customfield-id</div></div>
+    <p class="hc-prompt">man customfield-id</p>
+    <h2 class="hc-h2" style="margin-top:12px">Gotcha: <span style="color:var(--hc-amber)">acli</span> necesita el ID numérico</h2>
+    <ul class="hc-bullets">
+      <li><code>acli</code> (y la API de Jira) identifica cada custom field por <strong>ID numérico</strong>, no por su nombre visible.</li>
+      <li>No existe <code>acli jira field list</code>: no hay forma de listar campos por nombre.</li>
+      <li>No hay name-addressing: nunca se le pasa el nombre del campo, solo el ID.</li>
+      <li class="gotcha">Estrategia sin código: un <strong>ticket modelo</strong>, un ticket real con cada campo lleno, que después se inspecciona.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># lo que ves en la UI          # lo que entiende acli</span>
+Criterios de aceptación   <span class="fn">→</span>   <span class="var">customfield_10050</span>   <span class="cm"># ejemplo</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag red">sin name-addressing</span>
+      <span class="hc-tag amber">ticket modelo</span>
+    </div>
+    <div class="hc-footer"><span>gotcha</span><span>14 / 18</span></div>
+    <aside class="notes">
+      <p>acli, y la API de Jira en general, identifica cada custom field por un ID numérico, customfield seguido de números, no por el nombre que ven en la UI. No existe acli jira field list, así que no hay forma de listar campos por nombre, y nunca se le puede pasar el nombre del campo, solo el ID. La estrategia sin escribir código es un ticket modelo: un ticket real con cada campo lleno de un valor reconocible, que después inspeccionamos.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 15. ACCIÓN: DESCUBRIR IDs CON EL TICKET MODELO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · discovery-ids</div></div>
+    <p class="hc-prompt">acli jira workitem view</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: descubrir <span style="color:var(--hc-green)">IDs</span> con el ticket modelo</h2>
+    <ul class="hc-bullets">
+      <li>Ticket modelo: una historia con los <strong>4 campos llenos</strong>, cada uno con un texto reconocible. Hoy, el de práctica; en tu empresa, el tuyo.</li>
+      <li class="gotcha"><code>acli</code> no devuelve el nombre de los campos: uno vacío no aparece y uno lleno se reconoce por su contenido.</li>
+      <li class="gotcha">Sin <code>--fields "*all"</code> la vista default no trae ningún <code>customfield_</code>.</li>
+      <li>Alternativas sin código: la URL del admin al editar el campo (<code>?id=NNNNN</code>) o <code>curl .../rest/api/3/field</code>.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">$</span> acli jira workitem view <span class="var">CLAVE-N</span> --fields <span class="st">"*all"</span> --json | jq <span class="st">'
+    .fields | to_entries
+    | map(select(.key | startswith("customfield_")))
+    | map(select(.value != null and .value != []))'</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag red">gotcha: falta --fields "*all"</span>
+      <span class="hc-tag amber">campos llenos</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>15 / 18</span></div>
+    <aside class="notes">
+      <p>El ticket modelo es una historia con los 4 campos llenos, cada uno con un texto reconocible. Hoy usan el del proyecto de práctica; en su empresa crean el suyo. Ojo: acli no devuelve el nombre de los campos, así que un campo vacío no aparece y uno lleno se reconoce por su contenido. Corran acli jira workitem view con --fields "*all" y --json, y filtren con jq las claves customfield. Sin --fields "*all" la vista default no trae ningún custom field: es el error más probable de este paso. Alternativas sin código: la URL del admin de Jira al editar el campo, o curl a /rest/api/3/field.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 16. ACCIÓN: GUARDAR IDs EN JIRA-FIELDS.JSON ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · jira-fields</div></div>
+    <p class="hc-prompt">edit .claude/jira-fields.json</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: guardar IDs en <span style="color:var(--hc-green)">jira-fields.json</span></h2>
+    <ul class="hc-bullets">
+      <li>Cada <code>customfield_NNNNN</code> va en su clave: <code>acceptance_criteria</code>, <code>business_rules_specification</code>, <code>scope</code>, <code>out_of_scope</code>. La clave del proyecto, en <code>CLAUDE.md</code> (<code>## Proyecto Jira</code>).</li>
+      <li>La skill que crea historias (00d) lee los IDs de ahí: nunca los escribe fijos.</li>
+      <li>Hoy: el repo ya trae los IDs de práctica, verificás que coinciden. En tu empresa: los cargás en tu repo de trabajo, no en el clon del curso.</li>
+      <li class="gotcha">Verificación: <code>jq -r 'to_entries[] | "\(.key): \(.value.id)"' .claude/jira-fields.json</code> muestra 4 IDs, ninguno vacío.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px">ticket modelo <span class="var">CLAVE-N</span>
+   <span class="fn">↓</span> acli view --fields "*all" | jq
+<span class="var">customfield_10050</span> = "Escenario: cupón válido..."
+   <span class="fn">↓</span> en tu empresa: lo copiás a mano
+.claude/jira-fields.json  <span class="st">{ "acceptance_criteria": { "id": "customfield_10050" } }</span>
+   <span class="fn">↓</span> lo lee
+skill product-management <span class="cm"># tema 00d</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">ids fuera del código</span>
+      <span class="hc-tag amber">clave en claude.md</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>16 / 18</span></div>
+    <aside class="notes">
+      <p>El ticket modelo muestra cada customfield con su contenido. Cada ID va en su clave de .claude/jira-fields.json: acceptance_criteria, business_rules_specification, scope y out_of_scope; la clave del proyecto va en CLAUDE.md, sección Proyecto Jira. La skill que crea historias en el 00d lee los IDs de ahí, nunca los escribe fijos. Hoy el repo ya trae los IDs y la clave del proyecto de práctica: verifiquen que coinciden con el ticket modelo. En su empresa los cargan en su repo de trabajo, no en el clon del curso, que se actualiza con git pull. Verificación: el jq que ven en pantalla muestra los 4 IDs, ninguno vacío.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 17. GOTCHA: EDITAR UN CUSTOM FIELD YA CREADO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>gotcha · edit-custom-field</div></div>
+    <p class="hc-prompt">acli jira workitem edit</p>
+    <h2 class="hc-h2" style="margin-top:12px">Gotcha: editar un <span style="color:var(--hc-amber)">custom field</span> ya creado</h2>
+    <ul class="hc-bullets">
+      <li><code>acli jira workitem edit</code> rechaza cualquier custom field: <strong>error duro, exit 1</strong>.</li>
+      <li>Los custom fields solo se llenan en <code>create</code>, nunca en <code>edit</code>.</li>
+      <li class="gotcha">Para corregir uno en un ticket existente: REST <code>PUT</code> con <code>curl</code> y tus variables <code>ATLASSIAN_EMAIL</code> / <code>ATLASSIAN_API_TOKEN</code>.</li>
+      <li>Por eso <code>bun run claude</code>: sin esas variables cargadas, el <code>curl</code> sale vacío. Se usa en el 00d.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">create</span>  custom fields <span class="st">OK</span>
+<span class="kw">edit</span>    custom fields <span class="var">exit 1</span>   <span class="fn">→</span>   REST PUT /rest/api/3/issue/{KEY}</pre>
+    <div class="kw-row">
+      <span class="hc-tag red">edit rechaza custom fields</span>
+      <span class="hc-tag amber">put rest → tema 00d</span>
+    </div>
+    <div class="hc-footer"><span>gotcha</span><span>17 / 18</span></div>
+    <aside class="notes">
+      <p>acli jira workitem edit rechaza cualquier custom field con error duro, exit 1: los custom fields solo se llenan en create. Para corregir uno en un ticket que ya existe, por ejemplo un criterio de aceptación mal escrito, el único camino es REST PUT con curl y sus variables ATLASSIAN_EMAIL y ATLASSIAN_API_TOKEN. Por eso abrimos Claude con bun run claude: sin esas variables, el curl sale vacío. Lo van a usar en el 00d si tienen que corregir una historia.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 18. CIERRE Y CHECKLIST ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>EOF</div></div>
+    <p class="hc-prompt">setup --status</p>
+    <h2 class="hc-h2" style="margin-top:12px">Checklist del <span style="color:var(--hc-green)">día</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px">[<span class="st">OK</span>] MCP explicado y diferenciado de CLI
+[<span class="st">OK</span>] Claude abierto con bun run claude (variables de .env cargadas)
+[<span class="st">OK</span>] Context7 CLI + skill global y Bun instalados
+[<span class="st">OK</span>] acli y Atlassian MCP conectados con tu API Token
+[<span class="st">OK</span>] IDs de .claude/jira-fields.json verificados contra el ticket modelo
+[<span class="st">OK</span>] Receta para tu empresa: campos Párrafo, statuses, ticket modelo
+[<span class="st">OK</span>] Asistente + skill acli emparejan campos con jira-fields.json
+
+<span class="cm"># próxima clase: tema 00d — crear historias con contexto manual</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">jira conectado</span>
+      <span class="hc-tag amber">próxima clase: 00d</span>
+    </div>
+    <div class="hc-footer"><span>tema-00c · AI-Powered QA</span><span>18 / 18</span></div>
+    <aside class="notes">
+      <p>Repasemos: explican qué es un MCP y en qué se diferencia de un CLI. Abren Claude con bun run claude, con sus variables cargadas. Tienen Context7 y Bun instalados. Conectaron acli y Atlassian MCP con su API Token. Verificaron los IDs de jira-fields.json contra el ticket modelo de práctica, y saben crear campos, statuses y ticket modelo en el Jira de su empresa. Y la prueba de punta a punta: el asistente, con la skill acli, empareja los campos del ticket modelo con jira-fields.json. La próxima clase, Tema 00d, usan todo esto para crear su primera épica e historia.</p>
+    </aside>
+  </section>
+
+</div>
+
+<div style="position:fixed;bottom:12px;left:12px;font-size:11px;color:#484f5866;z-index:100;pointer-events:none">
+  S modo orador · ← → navegar · F pantalla completa · O resumen
+</div>
+
+<script src="assets/runtime.js"></script>
+</body>
+</html>
