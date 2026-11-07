@@ -6,7 +6,7 @@ correspondientes a ese tema.
 
 ## Estado actual
 
-Temas dictados: **00a**, **00b** y **00c**.
+Temas dictados: **00a**, **00b**, **00c** y **00d**.
 
 - **Tema 00a — Terminal, CLI y primer asistente IA:** instalaste Warp, Node.js y un runner de IA
   (Claude Code CLI o Codex CLI). Este repo tiene `README.md` y `CLAUDE.md` (memoria de IA).
@@ -20,6 +20,11 @@ Temas dictados: **00a**, **00b** y **00c**.
   variables. Este repo suma `package.json`, `.env.example`, `.mcp.json`, la skill `acli` y los IDs
   de los campos de Story del Jira de práctica en `.claude/jira-fields.json`. También tenés la
   receta para preparar el Jira de tu empresa (campos Párrafo, statuses, ticket modelo).
+- **Tema 00d — Crear épicas e historias en Jira:** viste la anatomía de una historia
+  (título `{Funcionalidad} | {Acción}`, Como/Quiero/Para, campos separados, criterios de
+  aceptación en Gherkin en voz de negocio) y la diferencia entre épica e historia. Con la skill
+  `product-management` creaste en el Jira de práctica una épica de Toolshop con sus historias y una
+  historia extra, respondiendo la entrevista desde la app. Este repo suma esa skill.
 
 ## Estructura
 
@@ -33,12 +38,14 @@ curso-ai-powered/
 ├── .mcp.json                         # MCP del proyecto: atlassian
 ├── .claude/
 │   ├── skills/acli/                  # skill para operar Jira desde la terminal
+│   ├── skills/product-management/    # skill para crear épicas e historias en Jira
 │   ├── jira-fields.json              # IDs de los 4 campos de Story del Jira de práctica
 │   └── jira-required.yaml            # campos y statuses que necesita el proyecto Jira
 ├── temario/                          # material de cada clase ya dictada
 │   ├── 00a-terminal-cli-ia/          # contenido.md, guion-diapositivas.md, deck/ (presentación)
 │   ├── 00b-git-github-skill/         # ídem
 │   ├── 00c-jira-conectado/           # ídem
+│   ├── 00d-creacion-historias/       # ídem
 │   └── apuntes/                      # apuntes tomados durante las clases, un .md por tema
 └── info-dev/                         # material para coordinar con el equipo de desarrollo
     ├── guia-dev-contexto.md          # guía para el equipo dev

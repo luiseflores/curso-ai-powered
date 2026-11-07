@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tema 00d — Crear épicas e historias en Jira</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="tpl-tema-00d">
+<div class="deck">
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="slide is-active">
+    <div class="hc-grid"></div>
+    <div class="hc-vignette"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>~/curso-ai-powered · zsh · tema-00d</div></div>
+    <div style="margin:auto 0">
+      <p class="hc-prompt">whoami --crear-historias</p>
+      <h1 class="hc-h1 anim-fade-up" data-anim="fade-up">CREAR<br>HISTORIAS<span class="hc-cursor"></span></h1>
+      <ul class="hc-bullets">
+        <li>Creás tu primera épica, con sus historias, en el Jira de práctica con la skill <code>product-management</code>.</li>
+        <li>Qué hace buena a una historia: título, Como/Quiero/Para, campos separados y criterios en Gherkin.</li>
+        <li>La skill te entrevista por todo lo que necesita: vos respondés navegando Toolshop.</li>
+        <li>La skill llega con <code>git pull</code>: la usás, no la creás.</li>
+      </ul>
+    </div>
+    <div class="kw-row">
+      <span class="hc-tag">historia de usuario</span>
+      <span class="hc-tag">épica</span>
+      <span class="hc-tag">gherkin</span>
+      <span class="hc-tag">toolshop</span>
+      <span class="hc-tag amber">entrevista</span>
+      <span class="hc-tag amber">product-management</span>
+      <span class="hc-tag amber">blocks</span>
+    </div>
+    <div class="hc-footer"><span>tema-00d · AI-Powered QA</span><span>01 / 13</span></div>
+    <aside class="notes">
+      <p>Hoy creamos la primera épica y la primera historia en el Jira de práctica, con la skill product-management. Antes vemos qué hace buena a una historia: el título, el como, quiero, para, los campos separados y los criterios de aceptación en Gherkin. La skill les hace una entrevista y ustedes responden navegando nuestro producto de práctica, Toolshop. La skill les llega con git pull: la usan, no la crean.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 2. EL PRODUCTO DE PRÁCTICA: TOOLSHOP ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>open · practicesoftwaretesting.com</div></div>
+    <p class="hc-prompt">open https://practicesoftwaretesting.com</p>
+    <h2 class="hc-h2" style="margin-top:12px">El producto de práctica: <span style="color:var(--hc-green)">Toolshop</span></h2>
+    <ul class="hc-bullets">
+      <li>Practice Software Testing, <strong>"Toolshop"</strong>: tienda online de herramientas hecha para practicar testing. Es real: abrila ahora.</li>
+      <li>Roles: <code>user</code> (cliente que compra) y <code>admin</code> (gestiona productos, categorías y pedidos).</li>
+      <li>Módulos para historias: catálogo con filtros y búsqueda, detalle, favoritos, carrito, checkout, facturas, mensajes, alquileres.</li>
+      <li>Las respuestas de la entrevista de hoy salen de navegar la app. En tu empresa, de tu producto.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn">CATEGORÍAS</span>  <span class="st">Hand Tools</span>   Hammer · Hand Saw · Wrench · Screwdriver · Pliers · Chisels · Measures
+            <span class="st">Power Tools</span>  Grinder · Sander · Saw · Drill
+            <span class="st">Other</span>        Tool Belts · Storage Solutions · Workbench · Safety Gear · Fasteners
+<span class="fn">MARCAS    </span>  ForgeFlex Tools · MightyCraft Hardware
+<span class="fn">PRODUCTO  </span>  <span class="st">"Thor Hammer"</span>  $11.14 · Hammer · ForgeFlex Tools · en stock</pre>
+    <div class="kw-row">
+      <span class="hc-tag">user · admin</span>
+      <span class="hc-tag">50 productos</span>
+      <span class="hc-tag amber">hoy: toolshop · en tu empresa: tu producto</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>02 / 13</span></div>
+    <aside class="notes">
+      <p>Nuestro producto de práctica es Practice Software Testing, conocido como Toolshop: una tienda online de herramientas hecha justamente para practicar testing. Es real, ábranla ahora. Tiene dos roles: user, el cliente que compra, y admin, que gestiona productos, categorías y pedidos. El catálogo tiene tres categorías raíz, Hand Tools, Power Tools y Other, con dieciséis subcategorías y dos marcas. Los módulos que vamos a usar para escribir historias: catálogo con filtros y búsqueda, detalle de producto, favoritos, carrito, checkout, facturas, mensajes de contacto y alquileres. Hoy las respuestas a la entrevista de la skill salen de navegar la app. En su empresa, de su producto.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 3. ANATOMÍA: TÍTULO Y COMO/QUIERO/PARA ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · historia</div></div>
+    <p class="hc-prompt">man historia --anatomia</p>
+    <h2 class="hc-h2" style="margin-top:12px">Anatomía: título y <span style="color:var(--hc-green)">Como / Quiero / Para</span></h2>
+    <ul class="hc-bullets">
+      <li>Historia = una necesidad de un usuario, escrita para que <strong>todo el equipo entienda lo mismo</strong>.</li>
+      <li>Título <code>{Funcionalidad} | {Acción}</code>: la acción es el "Quiero" en infinitivo, sin persona ni beneficio.</li>
+      <li>Un verbo y un objeto: si aparece un <strong>"y"</strong>, son dos historias.</li>
+      <li>El "para" es un beneficio, no la misma función repetida.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># título</span>
+<span class="st">Carrito | Agregar producto al carrito</span>
+
+<span class="cm"># descripción</span>
+<span class="kw">Como</span>   cliente registrado,
+<span class="kw">quiero</span> agregar una herramienta al carrito,
+<span class="kw">para</span>   comprarla junto con el resto de mi pedido.
+
+<span class="cm"># ✗ "quiero agregar al carrito y pagar"      → dos historias</span>
+<span class="cm"># ✗ "para tenerla en el carrito"             → repite la función</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">{funcionalidad} | {acción}</span>
+      <span class="hc-tag">un verbo, un objeto</span>
+      <span class="hc-tag red">"y" = dos historias</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>03 / 13</span></div>
+    <aside class="notes">
+      <p>Una historia es una necesidad de un usuario, escrita para que todo el equipo entienda lo mismo. El título sigue el formato funcionalidad, pipe, acción: Carrito, agregar producto al carrito. La acción es el quiero en infinitivo, sin persona ni beneficio. En la descripción va la historia completa: como cliente registrado, quiero agregar una herramienta al carrito, para comprarla junto con el resto de mi pedido. Un verbo y un objeto: si aparece una y, son dos historias. Y el para es un beneficio real: para tenerla en el carrito repite la función y no aporta nada.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 4. ANATOMÍA: CADA COSA EN SU CAMPO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>man · campos</div></div>
+    <p class="hc-prompt">jira view --campos</p>
+    <h2 class="hc-h2" style="margin-top:12px">Anatomía: cada cosa en <span style="color:var(--hc-green)">su campo</span></h2>
+    <ul class="hc-bullets">
+      <li>Reglas de negocio, Alcance, Fuera de alcance y Criterios de aceptación: cada uno en su <strong>campo Párrafo</strong> (los del 00c).</li>
+      <li>La descripción solo lleva la historia: <strong>nunca copia</strong> esos campos.</li>
+      <li>Por qué: si el AC vive en dos lugares, alguien corrige uno y el otro queda viejo.</li>
+      <li><strong>Story Points vacíos:</strong> estima el equipo que construye, no quien escribe la historia.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn">Descripción         </span>  Como cliente registrado, quiero… para…
+<span class="fn">Reglas de negocio   </span>  <span class="st">Solo se permite un "Thor Hammer" por cliente</span>
+<span class="fn">Alcance             </span>  <span class="st">Agregar desde el detalle del producto</span>
+<span class="fn">Fuera de alcance    </span>  <span class="st">Comprar como invitado</span>
+<span class="fn">Criterios de acept. </span>  3 escenarios Gherkin <span class="cm">(próxima slide)</span>
+<span class="fn">Story Points        </span>  <span class="cm">— vacío, lo estima el equipo</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">descripción = historia</span>
+      <span class="hc-tag">4 campos párrafo</span>
+      <span class="hc-tag amber">story points: vacíos</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>04 / 13</span></div>
+    <aside class="notes">
+      <p>Cada cosa va en su campo. Reglas de negocio, Alcance, Fuera de alcance y Criterios de aceptación tienen su propio campo Párrafo, los que vieron en el 00c. La descripción lleva solo la historia y nunca copia esos campos: si el criterio vive en dos lugares, alguien corrige uno y el otro queda viejo. Ejemplo con Toolshop: la regla solo un Thor Hammer por cliente va en Reglas de negocio; comprar como invitado puede quedar en Fuera de alcance. Y los Story Points quedan vacíos: estima el equipo que construye, no quien escribe la historia.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 5. CRITERIOS DE ACEPTACIÓN EN GHERKIN ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>cat · criterios.feature</div></div>
+    <p class="hc-prompt">cat criterios.feature</p>
+    <h2 class="hc-h2" style="margin-top:12px">Criterios de aceptación en <span style="color:var(--hc-green)">Gherkin</span></h2>
+    <ul class="hc-bullets">
+      <li>Mínimo <strong>3 escenarios</strong>: 1 camino feliz, 1 error, 1 borde. Con datos concretos, nunca "un producto".</li>
+      <li>Gherkin: <code>Escenario</code> · <code>Dado</code> (contexto) · <code>Cuando</code> (acción) · <code>Entonces</code> (resultado) · <code>Y</code>.</li>
+      <li>Regla real de Toolshop: "only one Thor Hammer is permitted per customer". Error real: "Long Nose Pliers" está sin stock.</li>
+      <li class="gotcha">El texto exacto de un mensaje se confirma en la app antes de cerrar el criterio. No se inventa.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="kw">Escenario:</span> Solo un Thor Hammer por cliente
+  <span class="kw">Dado</span>     un carrito con 1 <span class="st">"Thor Hammer"</span> de <span class="st">$11.14</span>
+  <span class="kw">Cuando</span>   intento agregar otro <span class="st">"Thor Hammer"</span>
+  <span class="kw">Entonces</span> el carrito sigue con 1 <span class="st">"Thor Hammer"</span>
+  <span class="kw">Y</span>        veo un aviso de que solo se permite uno por cliente</pre>
+    <div class="kw-row">
+      <span class="hc-tag">feliz · error · borde</span>
+      <span class="hc-tag">datos concretos</span>
+      <span class="hc-tag red">no inventar mensajes</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>05 / 13</span></div>
+    <aside class="notes">
+      <p>Los criterios de aceptación van en Gherkin: Escenario, Dado para el contexto, Cuando para la acción, Entonces para el resultado, e Y para sumar pasos. Mínimo tres escenarios: un camino feliz, uno de error y uno de borde, siempre con datos concretos, nunca un producto genérico. En pantalla tienen el de borde con una regla real de Toolshop: la descripción del Thor Hammer dice que solo se permite uno por cliente. Para el error, Long Nose Pliers figura sin stock en la app. Gotcha: el texto exacto de un mensaje se confirma en la app antes de cerrar el criterio. No se inventa.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 6. VOZ DE NEGOCIO ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>diff · tecnico negocio</div></div>
+    <p class="hc-prompt">diff tecnico.feature negocio.feature</p>
+    <h2 class="hc-h2" style="margin-top:12px"><span style="color:var(--hc-cyan)">Técnico</span> vs voz de <span style="color:var(--hc-green)">negocio</span></h2>
+    <ul class="hc-bullets">
+      <li>Los criterios describen lo que <strong>ve y hace el usuario</strong>, no cómo está construido.</li>
+      <li>Nada de endpoints, códigos HTTP, tablas ni nombres de campos de la base.</li>
+      <li>Prueba rápida: si cambia la tecnología y el criterio sigue siendo cierto, está bien escrito.</li>
+      <li class="gotcha">Quien escribe en técnico deja afuera al PO y al negocio: el criterio deja de ser un acuerdo.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="cm"># ✗ técnico</span>
+<span class="kw">Entonces</span> POST /carts/{id} devuelve 422
+<span class="kw">Y</span>        la tabla cart_items tiene 1 fila con product_id 7
+
+<span class="cm"># ✓ negocio</span>
+<span class="kw">Entonces</span> el carrito sigue con 1 <span class="st">"Thor Hammer"</span>
+<span class="kw">Y</span>        veo un aviso de que solo se permite uno por cliente</pre>
+    <div class="kw-row">
+      <span class="hc-tag">lo que ve el usuario</span>
+      <span class="hc-tag red">sin endpoints ni http</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>06 / 13</span></div>
+    <aside class="notes">
+      <p>Voz de negocio: los criterios describen lo que ve y hace el usuario, no cómo está construido. Nada de endpoints, códigos HTTP, tablas ni nombres de campos de la base. La prueba rápida: si mañana cambia la tecnología y el criterio sigue siendo cierto, está bien escrito. En pantalla: la versión técnica habla de un POST que devuelve 422; la de negocio dice que veo un aviso de que solo se permite uno por cliente. Si lo escriben en técnico, dejan afuera al PO y el criterio deja de ser un acuerdo de equipo.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 7. ÉPICA VS HISTORIA ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>diff · epica historia</div></div>
+    <p class="hc-prompt">diff epica historia</p>
+    <h2 class="hc-h2" style="margin-top:12px"><span style="color:var(--hc-green)">Épica</span> vs <span style="color:var(--hc-cyan)">historia</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>Historia:</strong> entra en un sprint y cuelga de una épica que ya existe.</li>
+      <li><strong>Épica:</strong> 3 a 8 historias de un mismo módulo. Título nominal, sin verbo: <code>Favoritos</code>, <code>Carrito y checkout</code>.</li>
+      <li class="gotcha">Más de 8 historias, o algo que pide varias épicas: es demasiado grande, se parte antes.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn">ÉPICA</span>  <span class="st">Favoritos</span>
+  ├── <span class="st">Favoritos | Agregar producto a favoritos</span>
+  ├── <span class="st">Favoritos | Quitar producto de favoritos</span>
+  └── <span class="st">Favoritos | Ver mis favoritos</span>
+
+<span class="cm"># ✗ épica "Agregar favoritos"  → tiene verbo: es una historia</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">épica = módulo</span>
+      <span class="hc-tag">historia = un sprint</span>
+      <span class="hc-tag red">>8 historias: partir</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>07 / 13</span></div>
+    <aside class="notes">
+      <p>Épica contra historia. La historia entra en un sprint y cuelga de una épica que ya existe. La épica agrupa entre tres y ocho historias de un mismo módulo, y su título es nominal, sin verbo: Favoritos, o Carrito y checkout. Ejemplo: la épica Favoritos tiene agregar producto a favoritos, quitar producto de favoritos y ver mis favoritos. Si algo pide más de ocho historias o varias épicas, es demasiado grande y hay que partirlo antes de crearlo.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 8. LA SKILL PRODUCT-MANAGEMENT ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>cat · product-management/SKILL.md</div></div>
+    <p class="hc-prompt">cat .claude/skills/product-management/SKILL.md</p>
+    <h2 class="hc-h2" style="margin-top:12px">La skill <span style="color:var(--hc-green)">product-management</span></h2>
+    <ul class="hc-bullets">
+      <li>Skill del repo que <strong>crea épicas e historias</strong> en Jira.</li>
+      <li>Te entrevista por lo que necesita: rol, reglas, alcance y escenarios. Máximo 5 preguntas por ronda.</li>
+      <li>Te muestra el borrador completo: <strong>nada se escribe sin tu OK</strong>.</li>
+      <li class="gotcha">Si falta un ID en <code>.claude/jira-fields.json</code>, frena: vuelve a la receta del ticket modelo del 00c.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn">1</span> lee .claude/jira-fields.json         <span class="cm">→ ¿falta un ID? frena</span>
+<span class="fn">2</span> te pide que describas la necesidad  <span class="cm">→ con tus palabras</span>
+<span class="fn">3</span> entrevista (máx. 5 por ronda)        <span class="cm">→ rol · reglas · alcance · escenarios</span>
+<span class="fn">4</span> borrador completo                    <span class="cm">→ espera tu OK</span>
+<span class="fn">5</span> md-to-adf.ts (Bun) → acli            <span class="cm">→ crea en Jira</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">skill del repo</span>
+      <span class="hc-tag">acli + bun</span>
+      <span class="hc-tag amber">nada sin tu ok</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>08 / 13</span></div>
+    <aside class="notes">
+      <p>La skill product-management es la del repo que crea épicas e historias en Jira. Trabaja en cinco pasos. Uno: revisa jira-fields.json, y si falta un ID, frena. Dos: te pide que describas la necesidad con tus palabras. Tres: te entrevista por lo que necesita, rol, reglas, alcance y escenarios, con un máximo de cinco preguntas por ronda. Cuatro: te muestra el borrador completo; nada se escribe sin tu OK. Cinco: convierte los campos largos a ADF con Bun y crea en Jira con acli. Todo lo que conectaron en el 00c.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 9. ACCIÓN: CREAR TU PRIMERA ÉPICA ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · crear-epica</div></div>
+    <p class="hc-prompt">bun run claude</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: crear tu primera <span style="color:var(--hc-green)">épica</span></h2>
+    <ul class="hc-bullets">
+      <li>Abrí Claude con <code>bun run claude</code> (variables del <code>.env</code> cargadas).</li>
+      <li>Pedile <code>creá una épica para Favoritos</code> (o el módulo de Toolshop que elijas).</li>
+      <li>Respondé la entrevista <strong>navegando la app</strong>: qué hace el cliente en favoritos, qué pasa sin sesión iniciada.</li>
+      <li>Revisá el borrador: la épica con título nominal, sin verbo, y las <strong>3 a 8 historias</strong> que propone. Recién ahí das el OK.</li>
+      <li><strong>Verificación:</strong> la épica y sus historias existen en el Jira de práctica, en <code>REFINAMIENTO</code>.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="var">&gt;</span> creá una épica para Favoritos
+
+<span class="cm"># borrador → épica "Favoritos" + 3 historias · ¿las creo? (sí/no)</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">bun run claude</span>
+      <span class="hc-tag">navegar toolshop</span>
+      <span class="hc-tag amber">ok antes de crear</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>09 / 13</span></div>
+    <aside class="notes">
+      <p>Manos a la obra. Abran Claude con bun run claude, para que tenga las variables del .env. Pídanle crear una épica para Favoritos, o el módulo de Toolshop que elijan. La skill les va a hacer preguntas: respondan navegando la app, por ejemplo qué puede hacer el cliente en favoritos y qué pasa si no inició sesión. Revisen el borrador: la épica tiene título nominal, sin verbo, y la skill propone de tres a ocho historias en el mismo paso. Recién ahí den el OK. Verificación: la épica y sus historias existen en el Jira de práctica, en REFINAMIENTO.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 10. ACCIÓN: CREAR TU PRIMERA HISTORIA ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>action · crear-historia</div></div>
+    <p class="hc-prompt">claude --skill product-management</p>
+    <h2 class="hc-h2" style="margin-top:12px">Acción: crear tu primera <span style="color:var(--hc-green)">historia</span></h2>
+    <ul class="hc-bullets">
+      <li>Pedile una historia que no esté entre las de la épica: <code>creá una historia para ordenar mis favoritos por precio</code>. Propone la épica padre y pregunta por dependencias.</li>
+      <li>En el borrador revisá: título <code>{Funcionalidad} | {Acción}</code>, Como/Quiero/Para, 3 escenarios, campos separados.</li>
+      <li><strong>Verificación 1:</strong> la historia es hija de la épica y está en <code>REFINAMIENTO</code>.</li>
+      <li><strong>Verificación 2:</strong> AC como bloque de código Gherkin; la descripción no repite AC, Alcance ni Fuera de alcance.</li>
+      <li><strong>Verificación 3:</strong> el "Como" nombra un rol concreto (cliente registrado, admin), nunca "el usuario".</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn">Título     </span>  <span class="st">Favoritos | Ordenar favoritos por precio</span>
+<span class="fn">Padre      </span>  <span class="st">Favoritos</span>
+<span class="fn">Status     </span>  <span class="st">REFINAMIENTO</span>
+<span class="fn">Criterios  </span>  bloque gherkin · feliz · error · borde</pre>
+    <div class="kw-row">
+      <span class="hc-tag">hija de la épica</span>
+      <span class="hc-tag">refinamiento</span>
+      <span class="hc-tag amber">3 verificaciones</span>
+    </div>
+    <div class="hc-footer"><span>acción</span><span>10 / 13</span></div>
+    <aside class="notes">
+      <p>Ahora la historia. Pídanle una historia que no esté entre las de la épica, por ejemplo ordenar mis favoritos por precio. La skill propone la épica padre y les pregunta si depende de otra historia. En el borrador revisen todo lo que vimos: título funcionalidad pipe acción, como quiero para, tres escenarios y campos separados. Tres verificaciones en Jira. Uno: la historia es hija de la épica y está en REFINAMIENTO. Dos: los criterios se ven como bloque de código Gherkin, y la descripción no repite criterios, alcance ni fuera de alcance. Tres: el como nombra un rol concreto, como cliente registrado, nunca el usuario.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 11. DEPENDENCIAS: BLOCKS Y RELATES ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>jira · link</div></div>
+    <p class="hc-prompt">acli jira workitem link</p>
+    <h2 class="hc-h2" style="margin-top:12px">Dependencias: <span style="color:var(--hc-green)">Blocks</span> y <span style="color:var(--hc-cyan)">Relates</span></h2>
+    <ul class="hc-bullets">
+      <li><strong>Blocks / is blocked by:</strong> dependencia dura, una historia no puede empezar sin la otra.</li>
+      <li><strong>Relates:</strong> solo informativa, no indica orden.</li>
+      <li>La skill te pregunta si la historia nueva depende de otra y crea el link <code>Blocks</code>. Ambos tipos vienen con Jira: no se crean.</li>
+      <li class="gotcha"><code>acli</code> invierte los flags <code>--out</code>/<code>--in</code>: por eso la skill verifica la dirección después de crear el link.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="st">Favoritos | Agregar producto a favoritos</span>
+        │ <span class="kw">blocks</span>
+        ▼
+<span class="st">Favoritos | Ver mis favoritos</span>       <span class="cm">← is blocked by</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">blocks = orden</span>
+      <span class="hc-tag">relates = info</span>
+      <span class="hc-tag red">acli invierte --out/--in</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>11 / 13</span></div>
+    <aside class="notes">
+      <p>Las historias pueden depender entre sí. Blocks, o is blocked by, es una dependencia dura: una historia no puede empezar sin la otra. Relates es solo informativa y no indica orden. Ejemplo: ver mis favoritos está bloqueada por agregar producto a favoritos, porque sin agregar no hay nada que ver. La skill les pregunta si la historia nueva depende de otra y crea el link Blocks; los dos tipos vienen con Jira, no se crean. Gotcha: acli invierte los flags out e in, por eso la skill verifica la dirección después de crear cada link.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 12. EN TU EMPRESA ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>ssh · empresa</div></div>
+    <p class="hc-prompt">cd ~/repo-de-trabajo</p>
+    <h2 class="hc-h2" style="margin-top:12px">En tu <span style="color:var(--hc-green)">empresa</span></h2>
+    <ul class="hc-bullets">
+      <li>Mismo flujo con tu producto real, en <strong>tu repo de trabajo</strong>, no en el clon del curso.</li>
+      <li>Antes: la receta del 00c aplicada a tu Jira (campos Párrafo, statuses, IDs en <code>jira-fields.json</code>, clave en <code>CLAUDE.md</code>).</li>
+      <li>La entrevista pregunta todo en cada historia: tené a mano al PO o la app de tu producto.</li>
+      <li>Más adelante vas a ver cómo darle contexto de negocio a la skill para que pregunte menos.</li>
+    </ul>
+    <pre class="hc-codebox" style="margin-top:10px"><span class="fn">CLASE  </span>  clon del curso  · Jira de práctica · Toolshop
+<span class="fn">EMPRESA</span>  repo de trabajo · tu Jira          · tu producto</pre>
+    <div class="kw-row">
+      <span class="hc-tag">repo de trabajo</span>
+      <span class="hc-tag">receta 00c</span>
+      <span class="hc-tag amber">entrevista completa</span>
+    </div>
+    <div class="hc-footer"><span>concepto</span><span>12 / 13</span></div>
+    <aside class="notes">
+      <p>En su empresa repiten el mismo flujo con su producto real, en su repo de trabajo, no en el clon del curso. Antes necesitan la receta del 00c aplicada a su Jira: campos Párrafo, statuses, IDs en jira-fields.json y la clave en CLAUDE.md. La entrevista pregunta todo en cada historia, así que tengan a mano al PO o la app. Más adelante en el curso ven cómo darle contexto de negocio a la skill para que pregunte menos.</p>
+    </aside>
+  </section>
+
+  <!-- ============ 13. CIERRE Y CHECKLIST ============ -->
+  <section class="slide">
+    <div class="hc-grid"></div>
+    <div class="hc-scanlines"></div>
+    <div class="hc-chrome"><div class="dots"><span></span><span></span><span></span></div><div>EOF</div></div>
+    <p class="hc-prompt">backlog --status</p>
+    <h2 class="hc-h2" style="margin-top:12px">Checklist del <span style="color:var(--hc-green)">día</span></h2>
+    <pre class="hc-codebox" style="margin-top:10px">[<span class="st">OK</span>] Historia bien escrita: título, Como/Quiero/Para, campos separados
+[<span class="st">OK</span>] 3 escenarios Gherkin con datos concretos, en voz de negocio
+[<span class="st">OK</span>] Épica vs historia: 3 a 8 historias, título nominal
+[<span class="st">OK</span>] Épica, sus historias y una historia extra de Toolshop con product-management
+[<span class="st">OK</span>] Mismo flujo en tu empresa, con tu Jira y tu producto
+
+<span class="cm"># próxima clase: tema 00e — mapas de datos y API</span></pre>
+    <div class="kw-row">
+      <span class="hc-tag">primera historia creada</span>
+      <span class="hc-tag amber">próxima clase: 00e</span>
+    </div>
+    <div class="hc-footer"><span>tema-00d · AI-Powered QA</span><span>13 / 13</span></div>
+    <aside class="notes">
+      <p>Repasemos: reconocen una historia bien escrita, con título, como, quiero, para, campos separados y tres escenarios Gherkin en voz de negocio. Distinguen épica de historia. Crearon con product-management su primera épica, sus historias y una historia extra de Toolshop en el Jira de práctica, respondiendo la entrevista desde la app. Y saben repetirlo en su empresa. La próxima clase, Tema 00e: mapas de datos y API.</p>
+    </aside>
+  </section>
+
+</div>
+
+<div style="position:fixed;bottom:12px;left:12px;font-size:11px;color:#484f5866;z-index:100;pointer-events:none">
+  S modo orador · ← → navegar · F pantalla completa · O resumen
+</div>
+
+<script src="assets/runtime.js"></script>
+</body>
+</html>

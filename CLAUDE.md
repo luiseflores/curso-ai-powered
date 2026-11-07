@@ -13,8 +13,8 @@ contexto persistente del proyecto sin que se lo tengas que repetir cada vez.
 
 Repo del curso **AI-Powered QA**. Se construye por temas y solo contiene lo que ya se vio en clase
 más la configuración del tema en curso. Temas dictados hasta ahora: 00a (terminal, CLI, primer
-asistente de IA), 00b (Git, GitHub, skills) y 00c (Jira conectado). Tema en curso: 00d (crear
-épicas e historias en Jira).
+asistente de IA), 00b (Git, GitHub, skills), 00c (Jira conectado) y 00d (crear épicas e historias
+en Jira).
 
 ## Estructura
 
