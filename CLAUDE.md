@@ -13,7 +13,8 @@ contexto persistente del proyecto sin que se lo tengas que repetir cada vez.
 
 Repo del curso **AI-Powered QA**. Se construye por temas y solo contiene lo que ya se vio en clase
 más la configuración del tema en curso. Temas dictados hasta ahora: 00a (terminal, CLI, primer
-asistente de IA), 00b (Git, GitHub, skills) y 00c (Jira conectado).
+asistente de IA), 00b (Git, GitHub, skills) y 00c (Jira conectado). Tema en curso: 00d (crear
+épicas e historias en Jira).
 
 ## Estructura
 
@@ -26,6 +27,7 @@ asistente de IA), 00b (Git, GitHub, skills) y 00c (Jira conectado).
 - `.env.example`: plantilla de variables, sin valores. Tus credenciales van en `.env`.
 - `.mcp.json`: MCP del proyecto. Por ahora solo `atlassian`.
 - `.claude/skills/acli/`: skill para operar Jira desde la terminal y conversor `md-to-adf.ts`.
+- `.claude/skills/product-management/`: skill para crear épicas e historias en Jira.
 - `.claude/jira-fields.json` y `.claude/jira-required.yaml`: ver secciones de abajo.
 - `temario/<tema>/`: material de cada clase dictada (`contenido.md`, `guion-diapositivas.md`,
   `deck/index.html`). Sirve de consulta; no es código del proyecto.
@@ -70,3 +72,4 @@ corresponde a cada tarea. Resolución vigente en este repo:
 
 - `.claude/skills/acli/SKILL.md`: cómo operar Jira desde la terminal y auditar el proyecto contra
   `.claude/jira-required.yaml`.
+- `.claude/skills/product-management/SKILL.md`: crear épicas e historias en Jira (workflows B y C).

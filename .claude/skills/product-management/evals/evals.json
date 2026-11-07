@@ -1,0 +1,46 @@
+{
+  "evals": [
+    {
+      "name": "should-trigger-add-feature",
+      "prompt": "Creá una historia: el comprador quiere aplicar un cupón de descuento en el carrito.",
+      "expected_behavior": "Activa product-management (workflow B). Lee jira-fields.json, clasifica como Nivel 1, entrevista por persona, reglas, alcance y escenarios (máximo 5 por ronda), muestra el borrador y con OK crea la historia con título '{Funcionalidad} | {Acción}', AC en bloques gherkin vía md-to-adf.ts, status REFINAMIENTO.",
+      "category": "positive"
+    },
+    {
+      "name": "should-trigger-epic-creation",
+      "prompt": "Necesito una épica para todo el módulo de pagos: cupones, medios de pago y reembolsos.",
+      "expected_behavior": "Activa product-management: B clasifica la idea como Nivel 2 y deriva a epic-creation.md (workflow C). Propone épica con título nominal y 3-8 historias, muestra borrador y espera OK, crea la épica (queda en BACKLOG) y las historias en REFINAMIENTO, corre la fase de dependencias y el chequeo de solapamiento de Alcance.",
+      "category": "positive"
+    },
+    {
+      "name": "should-stop-on-empty-field-id",
+      "prompt": "Creá una historia para cambiar la contraseña.",
+      "expected_behavior": "Si algún id de .claude/jira-fields.json está vacío, frena antes de escribir en Jira y le indica al usuario completar el ID con el ticket modelo.",
+      "category": "positive"
+    },
+    {
+      "name": "should-not-trigger-implementation",
+      "prompt": "Implementá la historia CLAVE-12, ya está lista para desarrollo.",
+      "expected_behavior": "No activa product-management: es implementación, fuera de esta skill.",
+      "category": "negative"
+    },
+    {
+      "name": "should-not-trigger-test-cases",
+      "prompt": "Escribí los casos de prueba de la historia CLAVE-12.",
+      "expected_behavior": "No activa product-management: casos de prueba están fuera de esta skill.",
+      "category": "negative"
+    },
+    {
+      "name": "should-not-trigger-testing",
+      "prompt": "Probá la historia CLAVE-12 en staging.",
+      "expected_behavior": "No activa product-management: probar una historia está fuera de esta skill.",
+      "category": "negative"
+    },
+    {
+      "name": "should-interview-for-everything",
+      "prompt": "Creá una historia para agregar un producto a favoritos.",
+      "expected_behavior": "Entrevista por persona, reglas, alcance y escenarios (máximo 5 por ronda), no inventa datos y crea la historia con el OK.",
+      "category": "positive"
+    }
+  ]
+}
